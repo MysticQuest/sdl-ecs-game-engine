@@ -16,6 +16,7 @@ public:
 	bool Running() { return isRunning; }
 
 private:
+	int frameCounter = 0;
 	bool isRunning;
 	SDL_Window* window;
 	SDL_Renderer* renderer;
