@@ -45,7 +45,9 @@ void Game::HandleEvents()
 }
 
 void Game::Update() 
-{}
+{
+	frameCounter++;
+}
 
 void Game::Render() 
 {
