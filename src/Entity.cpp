@@ -8,3 +8,18 @@ Entity::Entity(float posX, float posY, SDL_Texture* texture)
 	m_sdlRect.w = 32;
 	m_sdlRect.h = 32;
  }
+
+float Entity::GetPosX()
+{
+	return m_posX;
+}
+
+float Entity::GetPosY()
+{
+	return m_posY;
+}
+
+SDL_Texture* Entity::GetTexture()
+{
+	return m_texture;
+}
