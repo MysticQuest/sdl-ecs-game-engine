@@ -32,6 +32,21 @@ SDL_Texture* SDLWindow::LoadTexture(const char* filePath)
 	return texture;
 }
 
+void SDLWindow::Clear()
+{
+	SDL_RenderClear(renderer);
+}
+
+void SDLWindow::Render(SDL_Texture* texture)
+{
+	SDL_RenderCopy(renderer, texture, NULL, NULL);
+}
+
+void SDLWindow::Display()
+{
+	SDL_RenderPresent(renderer);
+}
+
 void SDLWindow::Clean()
 {
 	SDL_DestroyWindow(window);

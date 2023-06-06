@@ -1,7 +1,7 @@
 #include <memory>
 #include "Game.h"
 
-Game::Game(std::unique_ptr<SDLWindow> sdlWindow, int frame_rate)
+Game::Game(SDLWindow sdlWindow, int frame_rate)
 {
     frame_rate = frame_rate;
     Run();
