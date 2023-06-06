@@ -5,11 +5,9 @@
 #include "SDLWindow.h"
 #include "Game.h"
 
-
-
-Game* game = nullptr;
 SettingsResolver* settings = nullptr;
 std::string fileName = "settings.ini";
+Game* game = nullptr;
 
 int main(int argc, char* argv[])
 {
@@ -21,7 +19,7 @@ int main(int argc, char* argv[])
         config.width,
         config.height);
 
-    Game game(std::move(window), 60);
+    Game game(std::move(window), config.frame_rate);
 
     return 0;
 }
