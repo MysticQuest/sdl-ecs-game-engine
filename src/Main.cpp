@@ -4,6 +4,7 @@
 #include "SettingsResolver.h"
 #include "SDLWindow.h"
 #include "Game.h"
+#include "Entity.h"
 
 const std::string SETTINGS_FILE = "settings.ini";
 SettingsResolver* settings = nullptr;
