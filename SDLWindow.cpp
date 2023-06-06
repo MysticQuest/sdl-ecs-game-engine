@@ -1,7 +1,7 @@
 #include <iostream>
 #include "SDLWindow.h"
 
-SDLWindow::SDLWindow(const char* title, std::size_t window_width, std::size_t window_height)
+SDLWindow::SDLWindow(const char* title, int window_width, int window_height)
 :window(nullptr), renderer(nullptr)
 {
 	window = SDL_CreateWindow
@@ -17,6 +17,19 @@ SDLWindow::SDLWindow(const char* title, std::size_t window_width, std::size_t wi
 
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 	if (renderer == nullptr) { std::cout << "Renderer creation failed: " << SDL_GetError() << std::endl; }
+}
+
+SDL_Texture* SDLWindow::LoadTexture(const char* filePath)
+{
+	SDL_Texture* texture = nullptr;
+	texture = IMG_LoadTexture(renderer, filePath);
+
+	if (texture == nullptr)
+	{
+		std::cout << "Texture loading failed" << SDL_GetError() << std::endl;
+	}
+
+	return texture;
 }
 
 void SDLWindow::Clean()

@@ -34,6 +34,10 @@ Config SettingsResolver::ReadSettings(const std::string& file)
 
     while (std::getline(in, line))
     {
+        // Ignore comments
+        if (line.empty() || line[0] == ';' || line[0] == '#')  // Skip empty lines and comments
+            continue;
+
         std::stringstream ss(line);
         std::string key;
         std::string value;

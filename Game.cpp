@@ -9,11 +9,12 @@ Game::Game(std::unique_ptr<SDLWindow> sdlWindow, int frame_rate)
 
 Game::~Game() 
 {
+
 }
 
 void Game::PollEvents(bool& quit)
 {
-    // ...
+
 }
 
 void Game::Render()
