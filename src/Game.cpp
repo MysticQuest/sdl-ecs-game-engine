@@ -1,5 +1,6 @@
 #include <memory>
 #include "Game.h"
+#include "Entity.h"
 
 Game::Game(SDLWindow& sdlWindow, int frame_rate)
 {
@@ -39,6 +40,7 @@ void Game::Run(SDLWindow& sdlWindow)
     int frame_time, frames = 0;
 
     SDL_Texture* testTexture = sdlWindow.LoadTexture("res/textures/pac1.png");
+    Entity testEntity(150, 150, testTexture);
 
     while (isRunning)
     {
@@ -49,7 +51,7 @@ void Game::Run(SDLWindow& sdlWindow)
         Update();
 
         sdlWindow.Clear();
-        sdlWindow.Render(testTexture);
+        sdlWindow.Render(testEntity);
         sdlWindow.Display();
 
         frames++;

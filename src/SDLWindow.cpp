@@ -37,7 +37,7 @@ void SDLWindow::Clear()
 	SDL_RenderClear(renderer);
 }
 
-void SDLWindow::Render(SDL_Texture* texture)
+void SDLWindow::Render(Entity& entity)
 {
 	SDL_Rect srcRect;
 	srcRect.x = 0;
@@ -46,12 +46,12 @@ void SDLWindow::Render(SDL_Texture* texture)
 	srcRect.h = 32;
 
 	SDL_Rect dstRect;
-	dstRect.x = 0;
-	dstRect.y = 0;
+	dstRect.x = entity.GetPosX();
+	dstRect.y = entity.GetPosY();
 	dstRect.w = 32;
 	dstRect.h = 32;
 
-	SDL_RenderCopy(renderer, texture, &srcRect, &dstRect);
+	SDL_RenderCopy(renderer, entity.GetTexture(), &srcRect, &dstRect);
 }
 
 void SDLWindow::Display()
