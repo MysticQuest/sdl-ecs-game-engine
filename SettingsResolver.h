@@ -9,6 +9,7 @@ struct Config
     int width;
     int height;
     bool fullscreen;
+    int frame_rate;
 };
 
 class SettingsResolver

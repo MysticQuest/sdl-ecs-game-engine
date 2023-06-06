@@ -21,13 +21,15 @@ Config SettingsResolver::ReadSettings(const std::string& file)
         {"width", [](Config& config, const std::string& value) { config.width = std::stoi(value); }},
         {"height", [](Config& config, const std::string& value) { config.height = std::stoi(value); }},
         {"fullscreen", [](Config& config, const std::string& value) { config.fullscreen = (value == "true"); }},
+        {"frame_rate", [](Config& config, const std::string& value) { config.frame_rate = (value == "true"); }}
     };
 
     std::string line;
     Config config = {
         .width = 800,        // Default width
         .height = 600,       // Default height
-        .fullscreen = false // Default fullscreen value
+        .fullscreen = false, // Default fullscreen value
+        .frame_rate = 60   // Default frame rate
     };
 
     while (std::getline(in, line))
