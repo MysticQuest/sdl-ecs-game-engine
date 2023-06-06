@@ -23,3 +23,8 @@ SDL_Texture* Entity::GetTexture()
 {
 	return m_texture;
 }
+
+SDL_Rect Entity::GetRect()
+{
+	return m_sdlRect;
+}
