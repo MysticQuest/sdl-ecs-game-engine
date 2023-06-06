@@ -14,12 +14,14 @@ int main(int argc, char* argv[])
     settings = new SettingsResolver();
     Config config = settings->ReadSettings(SETTINGS_FILE);
 
-    std::unique_ptr<SDLWindow> window = std::make_unique<SDLWindow>(
+    SDLWindow window(
         "Test Title",
         config.width,
         config.height);
 
-    Game game(std::move(window), config.frame_rate);
+    SDL_Texture* testTexture = window.LoadTexture("res/textures/pac1.png");
+
+    Game game(window, config.frame_rate);
 
     return 0;
 }

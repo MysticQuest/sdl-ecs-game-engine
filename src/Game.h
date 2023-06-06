@@ -7,7 +7,7 @@
 class Game 
 {
 public:
-	Game(std::unique_ptr<SDLWindow> sdlWindow, int frame_rate);
+	Game(SDLWindow sdlWindow, int frame_rate);
 	~Game();
 
 	void Render();

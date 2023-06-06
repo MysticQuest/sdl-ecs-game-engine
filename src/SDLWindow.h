@@ -9,6 +9,9 @@ public:
 	~SDLWindow();
 
 	SDL_Texture* LoadTexture(const char* filePath);
+	void Clear();
+	void Render(SDL_Texture* texture);
+	void Display();
 	void Clean();
 
 private:
