@@ -18,6 +18,9 @@
     <ClCompile Include="src\SettingsResolver.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Entity.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Game.h">
@@ -27,6 +30,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\SettingsResolver.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Entity.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
