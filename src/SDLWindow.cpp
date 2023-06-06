@@ -39,7 +39,19 @@ void SDLWindow::Clear()
 
 void SDLWindow::Render(SDL_Texture* texture)
 {
-	SDL_RenderCopy(renderer, texture, NULL, NULL);
+	SDL_Rect srcRect;
+	srcRect.x = 0;
+	srcRect.y = 0;
+	srcRect.w = 32;
+	srcRect.h = 32;
+
+	SDL_Rect dstRect;
+	dstRect.x = 0;
+	dstRect.y = 0;
+	dstRect.w = 32;
+	dstRect.h = 32;
+
+	SDL_RenderCopy(renderer, texture, &srcRect, &dstRect);
 }
 
 void SDLWindow::Display()
