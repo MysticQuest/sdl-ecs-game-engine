@@ -12,9 +12,15 @@ Game::~Game()
 
 }
 
-void Game::PollEvents(bool& quit)
+void Game::PollEvents()
 {
+    SDL_Event event;
+    SDL_PollEvent(&event);
 
+    if (event.type == SDL_QUIT)
+    {
+        isRunning = false;
+    }
 }
 
 void Game::Render()
@@ -32,15 +38,11 @@ void Game::Run()
     Uint32 before, second = SDL_GetTicks(), after;
     int frame_time, frames = 0;
 
-    while (true)
+    while (isRunning)
     {
         before = SDL_GetTicks();
 
-        bool quit = false;
-        PollEvents(quit);
-
-        if (quit)
-            break;
+        PollEvents();
 
         Update();
 
