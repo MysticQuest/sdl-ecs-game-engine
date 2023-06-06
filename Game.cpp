@@ -1,63 +1,64 @@
+#include <memory>
 #include "Game.h"
 
-Game::Game() {}
-Game::~Game() {}
-
-void Game::Initialize(const char* title, int xPos, int yPos, int width, int height, bool fullScreen) 
+Game::Game(std::unique_ptr<SDLWindow> sdlWindow, int frame_rate)
 {
-	int flags = 0;
-	if (fullScreen)
-	{
-		flags = SDL_WINDOW_FULLSCREEN;
-	}
-
-	if (SDL_Init(SDL_INIT_EVERYTHING) == 0) 
-	{
-		window = SDL_CreateWindow(title, xPos, yPos, width, height, flags);
-		renderer = SDL_CreateRenderer(window, -1, 0);
-		if (renderer) 
-		{
-			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-		}
-
-		isRunning = true;
-	}
-	else
-	{
-		isRunning = false;
-	}
+    frame_rate = frame_rate;
+    Run();
 }
 
-void Game::HandleEvents() 
+Game::~Game() 
 {
-	SDL_Event event;
-	SDL_PollEvent(&event);
-
-	switch (event.type)
-	{
-	case SDL_QUIT:
-		isRunning = false;
-		break;
-
-	default:
-		break;
-	}
 }
 
-void Game::Update() 
+void Game::PollEvents(bool& quit)
 {
-	frameCounter++;
+    // ...
 }
 
-void Game::Render() 
+void Game::Render()
 {
-	SDL_RenderClear(renderer);
-	SDL_RenderPresent(renderer);
+
 }
 
-void Game::Clean() 
+void Game::Update()
 {
-	SDL_DestroyWindow(window);
-	SDL_DestroyRenderer(renderer);
-	SDL_Quit();
+
 }
+
+void Game::Run()
+{
+    Uint32 before, second = SDL_GetTicks(), after;
+    int frame_time, frames = 0;
+
+    while (true)
+    {
+        before = SDL_GetTicks();
+
+        bool quit = false;
+        PollEvents(quit);
+
+        if (quit)
+            break;
+
+        Update();
+
+        Render();
+
+        frames++;
+        after = SDL_GetTicks();
+        frame_time = after - before;
+
+        if (after - second >= 1000)
+        {
+            frames = 0;
+            second = after;
+        }
+
+        if (frame_rate > frame_time)
+        {
+            SDL_Delay(frame_rate - frame_time);
+        }
+    }
+}
+

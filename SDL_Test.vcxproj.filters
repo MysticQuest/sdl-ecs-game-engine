@@ -24,8 +24,11 @@
     <ClCompile Include="SDLWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ConfigResolver.h">
+    <ClCompile Include="SettingsResolver.h">
       <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingsResolver.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -33,9 +36,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SDLWindow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="C:\Users\RestInPieces\Desktop\json.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

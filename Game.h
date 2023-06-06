@@ -1,24 +1,20 @@
 #pragma once
 
 #include <SDL.h>
+#include "SDLWindow.h"
 #include "SettingsResolver.h"
 
 class Game 
 {
 public:
-	Game();
+	Game(std::unique_ptr<SDLWindow> sdlWindow, int frame_rate);
 	~Game();
 
-	void Initialize(const char* title, int xPos, int yPos, int width, int height, bool fullScreen);
-	void HandleEvents();
-	void Update();
 	void Render();
-	void Clean();
-	bool Running() { return isRunning; }
+	void PollEvents(bool& quit);
+	void Update();
+	void Run();
 
 private:
-	int frameCounter = 0;
-	bool isRunning;
-	SDL_Window* window;
-	SDL_Renderer* renderer;
+	int frame_rate = 0;
 };

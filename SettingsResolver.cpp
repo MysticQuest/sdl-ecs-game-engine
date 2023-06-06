@@ -24,7 +24,11 @@ Config SettingsResolver::ReadSettings(const std::string& file)
     };
 
     std::string line;
-    Config config;
+    Config config = {
+        .width = 800,        // Default width
+        .height = 600,       // Default height
+        .fullscreen = false // Default fullscreen value
+    };
 
     while (std::getline(in, line))
     {

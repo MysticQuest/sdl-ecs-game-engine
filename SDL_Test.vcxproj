@@ -137,13 +137,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ConfigResolver.h" />
+    <ClCompile Include="SettingsResolver.cpp" />
+    <ClCompile Include="SettingsResolver.h" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="SDLWindow.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\Users\RestInPieces\Desktop\json.hpp" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="SDLWindow.h" />
   </ItemGroup>

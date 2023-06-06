@@ -1,46 +1,27 @@
 #include <SDL.h>
 #include <iostream>
 #include <memory>
-#include "Game.h"
+#include "SettingsResolver.h"
 #include "SDLWindow.h"
+#include "Game.h"
+
 
 
 Game* game = nullptr;
+SettingsResolver* settings = nullptr;
+std::string fileName = "settings.ini";
 
 int main(int argc, char* argv[])
 {
-    std::unique_ptr<SDLWindow> window = std::make_unique<SDLWindow>("Test Title", 800, 600);
-    SDL_Event event;
-    while (window->Running())
-    {
-        while (SDL_PollEvent(&event))
-        {
-            if (event.type == SDL_QUIT) {}
-        }
-    }
+    settings = new SettingsResolver();
+    Config config = settings->ReadSettings(fileName);
 
+    std::unique_ptr<SDLWindow> window = std::make_unique<SDLWindow>(
+        "Test Title",
+        config.width,
+        config.height);
 
-    //try
-    //{
-    //    std::cout << "Game has terminated successfully, score: " << std::endl;
-    //}
-    //catch (std::exception const& e)
-    //{
-    //    std::cerr << e.what();
-    //}
-
-
-    //game = new Game();
-    //game->Initialize("Test Title", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
-
-    //while (game->Running())
-    //{
-    //    game->HandleEvents();
-    //    game->Update();
-    //    game->Render();
-    //}
-
-    //game->Clean();
+    Game game(std::move(window), 60);
 
     return 0;
 }
