@@ -14,14 +14,12 @@ int main(int argc, char* argv[])
     settings = new SettingsResolver();
     Config config = settings->ReadSettings(SETTINGS_FILE);
 
-    SDLWindow window(
+    SDLWindow sdlWindow(
         "Test Title",
         config.width,
         config.height);
 
-    SDL_Texture* testTexture = window.LoadTexture("res/textures/pac1.png");
-
-    Game game(window, config.frame_rate);
+    Game game(sdlWindow, config.frame_rate);
 
     return 0;
 }

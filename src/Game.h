@@ -7,13 +7,13 @@
 class Game 
 {
 public:
-	Game(SDLWindow sdlWindow, int frame_rate);
+	Game(SDLWindow& sdlWindow, int frame_rate);
 	~Game();
 
 	void Render();
 	void PollEvents();
 	void Update();
-	void Run();
+	void Run(SDLWindow& sdlWindow);
 
 private:
 	int frame_rate = 0;
