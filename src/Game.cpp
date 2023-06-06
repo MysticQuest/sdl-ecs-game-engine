@@ -1,10 +1,10 @@
 #include <memory>
 #include "Game.h"
 
-Game::Game(SDLWindow sdlWindow, int frame_rate)
+Game::Game(SDLWindow& sdlWindow, int frame_rate)
 {
     frame_rate = frame_rate;
-    Run();
+    Run(sdlWindow);
 }
 
 Game::~Game() 
@@ -33,10 +33,12 @@ void Game::Update()
 
 }
 
-void Game::Run()
+void Game::Run(SDLWindow& sdlWindow)
 {
     Uint32 before, second = SDL_GetTicks(), after;
     int frame_time, frames = 0;
+
+    SDL_Texture* testTexture = sdlWindow.LoadTexture("res/textures/pac1.png");
 
     while (isRunning)
     {
@@ -46,7 +48,9 @@ void Game::Run()
 
         Update();
 
-        Render();
+        sdlWindow.Clear();
+        sdlWindow.Render(testTexture);
+        sdlWindow.Display();
 
         frames++;
         after = SDL_GetTicks();
