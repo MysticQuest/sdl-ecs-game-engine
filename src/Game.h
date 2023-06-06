@@ -11,10 +11,11 @@ public:
 	~Game();
 
 	void Render();
-	void PollEvents(bool& quit);
+	void PollEvents();
 	void Update();
 	void Run();
 
 private:
 	int frame_rate = 0;
+	bool isRunning = true;
 };
