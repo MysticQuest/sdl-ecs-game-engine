@@ -53,9 +53,7 @@ void Game::Run(SDLWindow& sdlWindow)
   
     for (int i = 0; i < 200000; ++i)
     {
-        int randomX = distrib(gen);
-        int randomY = distrib(gen);
-        entities.push_back(Entity(randomX, randomY, testTexture));
+        entities.push_back(Entity(Vector2f(distrib(gen), distrib(gen)), testTexture));
     }
 
     Uint32 before, second = SDL_GetTicks(), after;
