@@ -28,7 +28,7 @@ void Game::PollEvents()
 void Game::Render(SDLWindow& sdlWindow, const std::vector<Entity>& entities)
 {
     sdlWindow.Clear();
-    for (const auto& entity : entities)
+    for (const Entity& entity : entities)
     {
         sdlWindow.Render(entity);
     }
