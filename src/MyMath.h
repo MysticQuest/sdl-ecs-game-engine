@@ -21,8 +21,8 @@ struct Vector2f
 class RNG
 {
 public:
-	static int GenerateInt(int lower, int upper);
-	static float GenerateFloat(float lower, float upper);
+	static int Int(int lower, int upper);
+	static float Float(float lower, float upper);
 
 private:
 	static std::mt19937& getGenerator();
