@@ -21,9 +21,7 @@
     <ClCompile Include="src\Entity.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="MyMath.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
+    <ClCompile Include="src\MyMath.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Game.h">
@@ -38,8 +36,6 @@
     <ClInclude Include="src\Entity.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="MyMath.h">
-      <Filter>src</Filter>
-    </ClInclude>
+    <ClInclude Include="src\MyMath.h" />
   </ItemGroup>
 </Project>

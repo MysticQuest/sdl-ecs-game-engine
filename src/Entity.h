@@ -1,17 +1,17 @@
 #pragma once
 
 #include <SDL.h>
+#include "MyMath.h"
 
 class Entity
 {
 public:
-	Entity(int posX, int posY, SDL_Texture* texture);
-	int GetPosX() const;
-	int GetPosY() const;
+	Entity(Vector2f m_pos, SDL_Texture* texture);
+	const Vector2f& GetPos() const { return m_pos; }
 	SDL_Texture* GetTexture() const;
 	SDL_Rect GetRect() const;
 private:
-	int m_posX, m_posY;
+	Vector2f m_pos;
 	SDL_Rect m_sdlRect;
 	SDL_Texture* m_texture;
 };
