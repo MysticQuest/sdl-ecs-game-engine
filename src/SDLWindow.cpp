@@ -15,7 +15,7 @@ SDLWindow::SDLWindow(const char* title, int window_width, int window_height)
 	);
 	if (window == nullptr) { std::cout << "Window creation failed: " << SDL_GetError() << std::endl; }
 
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED && SDL_RENDERER_PRESENTVSYNC);
 	if (renderer == nullptr) { std::cout << "Renderer creation failed: " << SDL_GetError() << std::endl; }
 }
 
