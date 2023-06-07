@@ -24,9 +24,14 @@ void Game::PollEvents()
     }
 }
 
-void Game::Render()
+void Game::Render(SDLWindow& sdlWindow, const std::vector<Entity>& entities)
 {
-
+    sdlWindow.Clear();
+    for (const auto& entity : entities)
+    {
+        sdlWindow.Render(entity);
+    }
+    sdlWindow.Display();
 }
 
 void Game::Update()
@@ -36,11 +41,12 @@ void Game::Update()
 
 void Game::Run(SDLWindow& sdlWindow)
 {
+    SDL_Texture* testTexture = sdlWindow.LoadTexture("res/textures/pac1.png");
+    Entity prototype(150, 150, testTexture);
+    std::vector<Entity> entities(200000, prototype);
+
     Uint32 before, second = SDL_GetTicks(), after;
     int frame_time, frames = 0;
-
-    SDL_Texture* testTexture = sdlWindow.LoadTexture("res/textures/pac1.png");
-    Entity testEntity(150, 150, testTexture);
 
     while (isRunning)
     {
@@ -50,10 +56,8 @@ void Game::Run(SDLWindow& sdlWindow)
 
         Update();
 
-        sdlWindow.Clear();
-        sdlWindow.Render(testEntity);
-        sdlWindow.Display();
-
+        Render(sdlWindow, entities);
+        
         frames++;
         after = SDL_GetTicks();
         frame_time = after - before;

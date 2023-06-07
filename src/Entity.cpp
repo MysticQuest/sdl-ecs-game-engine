@@ -1,6 +1,6 @@
 #include "Entity.h"
 
-Entity::Entity(float posX, float posY, SDL_Texture* texture)
+Entity::Entity(int posX, int posY, SDL_Texture* texture)
 	:m_posX(posX), m_posY(posY), m_texture(texture)
 {
 	m_sdlRect.x = 0;
@@ -9,22 +9,22 @@ Entity::Entity(float posX, float posY, SDL_Texture* texture)
 	m_sdlRect.h = 32;
  }
 
-float Entity::GetPosX()
+int Entity::GetPosX() const
 {
 	return m_posX;
 }
 
-float Entity::GetPosY()
+int Entity::GetPosY() const
 {
 	return m_posY;
 }
 
-SDL_Texture* Entity::GetTexture()
+SDL_Texture* Entity::GetTexture() const
 {
 	return m_texture;
 }
 
-SDL_Rect Entity::GetRect()
+SDL_Rect Entity::GetRect() const
 {
 	return m_sdlRect;
 }

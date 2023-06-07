@@ -37,7 +37,7 @@ void SDLWindow::Clear()
 	SDL_RenderClear(renderer);
 }
 
-void SDLWindow::Render(Entity& entity)
+void SDLWindow::Render(const Entity& entity)
 {
 	SDL_Rect srcRect;
 	srcRect.x = entity.GetRect().x;
