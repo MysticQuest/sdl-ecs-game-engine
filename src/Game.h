@@ -10,7 +10,7 @@ public:
 	Game(SDLWindow& sdlWindow, int frame_rate);
 	~Game();
 
-	void Render();
+	void Render(SDLWindow& sdlWindow, const std::vector<Entity>& entities);
 	void PollEvents();
 	void Update();
 	void Run(SDLWindow& sdlWindow);
