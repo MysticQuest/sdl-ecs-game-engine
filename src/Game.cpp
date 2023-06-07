@@ -1,4 +1,5 @@
 #include <memory>
+#include <random>
 #include "Game.h"
 #include "Entity.h"
 
@@ -42,8 +43,20 @@ void Game::Update()
 void Game::Run(SDLWindow& sdlWindow)
 {
     SDL_Texture* testTexture = sdlWindow.LoadTexture("res/textures/pac1.png");
-    Entity prototype(150, 150, testTexture);
-    std::vector<Entity> entities(200000, prototype);
+    
+    std::random_device rd;  // Will be used to obtain a seed for the random number engine
+    std::mt19937 gen(rd()); // Standard mersenne_twister_engine seeded with rd()
+    std::uniform_int_distribution<> distrib(0, 1200);
+
+    std::vector<Entity> entities;
+    entities.reserve(200000);
+  
+    for (int i = 0; i < 200000; ++i)
+    {
+        int randomX = distrib(gen);
+        int randomY = distrib(gen);
+        entities.push_back(Entity(randomX, randomY, testTexture));
+    }
 
     Uint32 before, second = SDL_GetTicks(), after;
     int frame_time, frames = 0;
