@@ -45,13 +45,13 @@ void SDLWindow::Render(const Entity& entity)
 	srcRect.w = entity.GetRect().w;
 	srcRect.h = entity.GetRect().h;
 
-	SDL_Rect dstRect;
+	SDL_FRect dstRect;
 	dstRect.x = entity.GetPos().x;
 	dstRect.y = entity.GetPos().y;
-	dstRect.w = entity.GetRect().w;
-	dstRect.h = entity.GetRect().h;
+	dstRect.w = static_cast<float>(entity.GetRect().w);
+	dstRect.h = static_cast<float>(entity.GetRect().h);
 
-	SDL_RenderCopy(renderer, entity.GetTexture(), &srcRect, &dstRect);
+	SDL_RenderCopyF(renderer, entity.GetTexture(), &srcRect, &dstRect);
 }
 
 void SDLWindow::Display()

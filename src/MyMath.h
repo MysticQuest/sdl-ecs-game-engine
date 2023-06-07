@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <random>
 
 struct Vector2f
 {
@@ -16,3 +17,18 @@ struct Vector2f
 
 	float x, y;
 };
+
+class RNG
+{
+public:
+	static int GenerateInt(int lower, int upper);
+	static float GenerateFloat(float lower, float upper);
+
+private:
+	static std::mt19937& getGenerator();
+};
+
+
+
+
+
