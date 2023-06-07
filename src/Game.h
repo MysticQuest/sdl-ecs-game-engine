@@ -3,6 +3,9 @@
 #include <SDL.h>
 #include "SDLWindow.h"
 #include "SettingsResolver.h"
+#include "Entity.h"
+#include "MyMath.h"
+#include "Utils.h"
 
 class Game 
 {

@@ -7,12 +7,12 @@ std::mt19937& RNG::getGenerator()
     return gen;
 }
 
-int RNG::GenerateInt(int lower, int upper)
+int RNG::Int(int lower, int upper)
 {
     return std::uniform_int_distribution<>(lower, upper)(getGenerator());
 }
 
-float RNG::GenerateFloat(float lower, float upper)
+float RNG::Float(float lower, float upper)
 {
     return std::uniform_real_distribution<float>(lower, upper)(getGenerator());
 }
