@@ -2,9 +2,12 @@
 
 #include <SDL.h>
 
-inline float GetTimeInSeconds()
+namespace utils
 {
-	float t = SDL_GetTicks();
-	t *= 0.001f;
-	return t;
+	inline float GetTimeInSeconds()
+	{
+		float t = SDL_GetTicks();
+		t *= 0.001f;
+		return t;
+	}
 }
