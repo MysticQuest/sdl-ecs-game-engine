@@ -48,7 +48,7 @@ void GameCore::Run(MySDLWindow& sdlWindow)
   
     for (int i = 0; i < 200000; ++i)
     {
-        entities.push_back(Entity(Vector2f(RNG::Float(0, 800), RNG::Float(0, 800)), testTexture));
+        entities.push_back(Entity(Vector2f(RNG::Float(0, 10000000), RNG::Float(0, 10000000)), testTexture));
     }
 
     Uint32 before, second = SDL_GetTicks(), after;
