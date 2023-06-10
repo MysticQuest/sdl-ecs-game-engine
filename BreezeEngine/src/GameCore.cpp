@@ -1,19 +1,19 @@
 #include <memory>
 #include <random>
-#include "Game.h"
+#include "GameCore.h"
 
-Game::Game(SDLWindow& sdlWindow, int frame_rate)
+GameCore::GameCore(MySDLWindow& sdlWindow, int frame_rate)
 {
-    frame_rate = frame_rate;
+    m_frame_rate = frame_rate;
     Run(sdlWindow);
 }
 
-Game::~Game() 
+GameCore::~GameCore() 
 {
 
 }
 
-void Game::PollEvents()
+void GameCore::PollEvents()
 {
     SDL_Event event;
     SDL_PollEvent(&event);
@@ -24,7 +24,7 @@ void Game::PollEvents()
     }
 }
 
-void Game::Render(SDLWindow& sdlWindow, const std::vector<Entity>& entities)
+void GameCore::Render(MySDLWindow& sdlWindow, const std::vector<Entity>& entities)
 {
     sdlWindow.Clear();
     for (const Entity& entity : entities)
@@ -34,12 +34,12 @@ void Game::Render(SDLWindow& sdlWindow, const std::vector<Entity>& entities)
     sdlWindow.Display();
 }
 
-void Game::Update()
+void GameCore::Update()
 {
 
 }
 
-void Game::Run(SDLWindow& sdlWindow)
+void GameCore::Run(MySDLWindow& sdlWindow)
 {
     SDL_Texture* testTexture = sdlWindow.LoadTexture("res/textures/pac1.png");
 
@@ -74,9 +74,9 @@ void Game::Run(SDLWindow& sdlWindow)
             second = after;
         }
 
-        if (frame_rate > frame_time)
+        if (m_frame_rate > frame_time)
         {
-            SDL_Delay(frame_rate - frame_time);
+            SDL_Delay(m_frame_rate - frame_time);
         }
     }
 }
