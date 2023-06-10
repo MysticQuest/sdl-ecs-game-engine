@@ -146,7 +146,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="framework.h" />
     <ClInclude Include="src\BreezeAPI.h" />
     <ClInclude Include="src\Entity.h" />
     <ClInclude Include="src\Export.h" />
