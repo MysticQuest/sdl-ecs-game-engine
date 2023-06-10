@@ -1,13 +1,14 @@
 #pragma once
+
 #include <SDL.h>
 #include <SDL_image.h>
 #include "Entity.h"
 
-struct SDLWindow 
+struct MySDLWindow
 {
 public:
-	SDLWindow(const char* title, int window_width, int window_height);
-	~SDLWindow();
+	MySDLWindow(const char* title, int window_width, int window_height);
+	~MySDLWindow();
 
 	SDL_Texture* LoadTexture(const char* filePath);
 	void Clear();

@@ -1,7 +1,7 @@
 #include <iostream>
-#include "SDLWindow.h"
+#include "MySDLWindow.h"
 
-SDLWindow::SDLWindow(const char* title, int window_width, int window_height)
+MySDLWindow::MySDLWindow(const char* title, int window_width, int window_height)
 :window(nullptr), renderer(nullptr)
 {
 	window = SDL_CreateWindow
@@ -19,7 +19,7 @@ SDLWindow::SDLWindow(const char* title, int window_width, int window_height)
 	if (renderer == nullptr) { std::cout << "Renderer creation failed: " << SDL_GetError() << std::endl; }
 }
 
-SDL_Texture* SDLWindow::LoadTexture(const char* filePath)
+SDL_Texture* MySDLWindow::LoadTexture(const char* filePath)
 {
 	SDL_Texture* texture = nullptr;
 	texture = IMG_LoadTexture(renderer, filePath);
@@ -32,12 +32,12 @@ SDL_Texture* SDLWindow::LoadTexture(const char* filePath)
 	return texture;
 }
 
-void SDLWindow::Clear()
+void MySDLWindow::Clear()
 {
 	SDL_RenderClear(renderer);
 }
 
-void SDLWindow::Render(const Entity& entity)
+void MySDLWindow::Render(const Entity& entity)
 {
 	SDL_Rect srcRect;
 	srcRect.x = entity.GetRect().x;
@@ -54,17 +54,17 @@ void SDLWindow::Render(const Entity& entity)
 	SDL_RenderCopyF(renderer, entity.GetTexture(), &srcRect, &dstRect);
 }
 
-void SDLWindow::Display()
+void MySDLWindow::Display()
 {
 	SDL_RenderPresent(renderer);
 }
 
-void SDLWindow::Clean()
+void MySDLWindow::Clean()
 {
 	SDL_DestroyWindow(window);
 }
 
-SDLWindow::~SDLWindow()
+MySDLWindow::~MySDLWindow()
 {
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
