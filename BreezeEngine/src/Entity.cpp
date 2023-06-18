@@ -1,7 +1,7 @@
 #include "Entity.h"
 
-Entity::Entity(Vector2f pos, SDL_Texture* texture)
-	:m_pos(pos), m_texture(texture)
+Entity::Entity(Vector2f pos, Vector2 size, SDL_Texture* texture)
+	:m_pos(pos), m_size(size), m_texture(texture)
 {
 	m_sdlRect.x = 0;
 	m_sdlRect.y = 0;
