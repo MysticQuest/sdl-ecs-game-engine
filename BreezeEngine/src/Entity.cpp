@@ -22,8 +22,10 @@ SDL_Rect Entity::GetRect() const
 
 void Entity::Update(float deltaTime)
 {
-	//m_transform.Translate(m_velocity * (deltaTime / 1000));
-	//m_sdlRect.x += m_transform.X;
-	//m_sdlRect.y += m_transform.Y;
-	//std::cout << m_transform.X << std::endl;
+	m_transform.Translate(m_velocity * (deltaTime / 1000));
+	m_sdlRect.x += m_transform.X;
+	m_sdlRect.y += m_transform.Y;
+	std::cout << m_transform.X << std::endl;
+	m_sdlRect.x -= m_transform.X;
+	m_sdlRect.y -= m_transform.Y;
 }
