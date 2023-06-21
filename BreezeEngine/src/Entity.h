@@ -1,18 +1,26 @@
 #pragma once
 
 #include <SDL.h>
+#include "IEntity.h"
 #include "MyMath.h"
 
-class Entity
+class Entity : public IEntity
 {
 public:
-	Entity(Vector2f pos, Vector2 size, SDL_Texture* texture);
-	const Vector2f& GetPos() const { return m_pos; }
+	Entity(Transform* transform, int width, int height, SDL_Texture* texture, SDL_RendererFlip flip = SDL_FLIP_NONE);
+	const Transform& GetPos() const { return m_transform; }
 	SDL_Texture* GetTexture() const;
 	SDL_Rect GetRect() const;
+	bool needsUpdate;
+
+	virtual void Render() = 0;
+	virtual void Update(float deltaTime) = 0;
+	virtual void Clean() = 0;
+
 private:
-	Vector2f m_pos;
-	Vector2 m_size;
+	Transform m_transform;
+	int m_width, m_height;
 	SDL_Rect m_sdlRect;
 	SDL_Texture* m_texture;
+	SDL_RendererFlip m_flip;
 };
