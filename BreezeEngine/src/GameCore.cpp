@@ -34,25 +34,32 @@ void GameCore::Render(MySDLWindow& sdlWindow, const std::vector<Entity>& entitie
     sdlWindow.Display();
 }
 
-void GameCore::Update()
+void GameCore::AddEntity(Transform& transform, int width, int height, Vector2f velocity, SDL_Texture* texture, SDL_RendererFlip flip)
 {
+    entities.push_back(Entity(transform, width, height, velocity, texture, flip));
+}
 
+void GameCore::Update(int deltaTime)
+{
+    for (Entity& entity : entities)
+    {
+        entity.Update(deltaTime);
+    }
 }
 
 void GameCore::Run(MySDLWindow& sdlWindow)
 {
     SDL_Texture* testTexture = sdlWindow.LoadTexture("res/textures/pac1.png");
-
-    std::vector<Entity> entities;
     entities.reserve(200000);
   
-    for (int i = 0; i < 200000; ++i)
+    for (int i = 0; i < 20000; ++i)
     {
-        entities.push_back(Entity(Vector2f(RNG::Float(0, 10000000), RNG::Float(0, 10000000)), testTexture));
+        entities.push_back(Entity(Transform(RNG::Float(0, 10000000), RNG::Float(0, 10000000)), 32, 32, Vector2f(30, 30), testTexture, SDL_FLIP_NONE));
     }
 
     Uint32 before, second = SDL_GetTicks(), after;
-    int frame_time, frames = 0;
+    int deltaTime = 0;
+    int frames = 0;
 
     while (isRunning)
     {
@@ -60,13 +67,13 @@ void GameCore::Run(MySDLWindow& sdlWindow)
 
         PollEvents();
 
-        Update();
+        Update(deltaTime);
 
         Render(sdlWindow, entities);
         
         frames++;
         after = SDL_GetTicks();
-        frame_time = after - before;
+        deltaTime = after - before;
 
         if (after - second >= 1000)
         {
@@ -74,9 +81,9 @@ void GameCore::Run(MySDLWindow& sdlWindow)
             second = after;
         }
 
-        if (m_frame_rate > frame_time)
+        if (m_frame_rate > deltaTime)
         {
-            SDL_Delay(m_frame_rate - frame_time);
+            SDL_Delay(m_frame_rate - deltaTime);
         }
     }
 }

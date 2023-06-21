@@ -51,7 +51,7 @@ struct Vector2
 		return Vector2(X - other.X, Y - other.Y);
 	}
 
-	inline Vector2 operator*(const float scalar) const
+	inline Vector2 operator*(const int scalar) const
 	{
 		return Vector2(X * scalar, Y * scalar);
 	}

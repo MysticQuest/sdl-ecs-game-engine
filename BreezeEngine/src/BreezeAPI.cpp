@@ -17,3 +17,9 @@ void BreezeAPI::Run()
 {
     game->Run(*window);
 }
+
+void BreezeAPI::AddEntity(Transform transform, int width, int height, Vector2f velocity, SDL_Texture* texture, int flip)
+{
+    SDL_RendererFlip sdlFlip = static_cast<SDL_RendererFlip>(flip);
+    game->AddEntity(transform, width, height, velocity, texture, sdlFlip);
+}

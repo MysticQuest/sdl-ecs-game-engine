@@ -150,7 +150,6 @@
     <ClInclude Include="src\Entity.h" />
     <ClInclude Include="src\Export.h" />
     <ClInclude Include="src\GameCore.h" />
-    <ClInclude Include="src\IEntity.h" />
     <ClInclude Include="src\MyMath.h" />
     <ClInclude Include="src\MySDLWindow.h" />
     <ClInclude Include="src\SettingsResolver.h" />
