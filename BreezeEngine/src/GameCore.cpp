@@ -52,9 +52,9 @@ void GameCore::Run(MySDLWindow& sdlWindow)
     SDL_Texture* testTexture = sdlWindow.LoadTexture("res/textures/pac1.png");
     entities.reserve(200000);
   
-    for (int i = 0; i < 20000; ++i)
+    for (int i = 0; i < 200000; ++i)
     {
-        entities.push_back(Entity(Transform(RNG::Float(0, 10000000), RNG::Float(0, 10000000)), 32, 32, Vector2f(30, 30), testTexture, SDL_FLIP_NONE));
+        entities.push_back(Entity(Transform(RNG::Float(0, 1000), RNG::Float(0, 1000)), 4, 4, Vector2f(1, 1), testTexture, SDL_FLIP_NONE));
     }
 
     Uint32 before, second = SDL_GetTicks(), after;
