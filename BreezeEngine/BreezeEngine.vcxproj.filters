@@ -35,6 +35,9 @@
     <ClInclude Include="src\BreezeAPI.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\IEntity.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Entity.cpp">
