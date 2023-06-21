@@ -46,8 +46,8 @@ void MySDLWindow::Render(const Entity& entity)
 	srcRect.h = entity.GetRect().h;
 
 	SDL_FRect dstRect;
-	dstRect.x = entity.GetPos().x;
-	dstRect.y = entity.GetPos().y;
+	dstRect.x = entity.GetPos().X;
+	dstRect.y = entity.GetPos().Y;
 	dstRect.w = static_cast<float>(entity.GetRect().w);
 	dstRect.h = static_cast<float>(entity.GetRect().h);
 

@@ -15,10 +15,13 @@ public:
 
 	void Render(MySDLWindow& sdlWindow, const std::vector<Entity>& entities);
 	void PollEvents();
-	void Update();
+	void Update(int deltaTime);
 	void Run(MySDLWindow& sdlWindow);
 
+	void AddEntity(Transform& transform, int width, int height, Vector2f velocity, SDL_Texture* texture, SDL_RendererFlip flip);
+
 private:
+	std::vector<Entity> entities;
 	int m_frame_rate = 0;
 	bool isRunning = true;
 };
