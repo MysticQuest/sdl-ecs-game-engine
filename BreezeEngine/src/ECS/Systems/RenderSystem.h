@@ -10,7 +10,7 @@ class RenderSystem
 public:
     RenderSystem(SDL_Renderer* renderer);
     void Update(ECSManager& ecsManager);
-    void Render(ECSManager& ecsManager);
+    void Render(ECSManager& ecsManager, SDL_Renderer* renderer);
 
 private:
     SDL_Renderer* m_renderer;
