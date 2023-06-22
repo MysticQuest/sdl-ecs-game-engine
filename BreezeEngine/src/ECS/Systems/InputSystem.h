@@ -5,5 +5,5 @@
 class InputSystem
 {
 public:
-	void Update(ECSManager& ecs)
+	void Update(ECSManager& ecs);
 };

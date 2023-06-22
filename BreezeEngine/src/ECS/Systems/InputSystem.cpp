@@ -1,6 +1,6 @@
 #include "InputSystem.h"
 
-void Update(ECSManager& ecs)
+void InputSystem::Update(ECSManager& ecs)
 {
     const Uint8* keys = SDL_GetKeyboardState(NULL);
 
