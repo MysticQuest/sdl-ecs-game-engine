@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SDL.h>
+#include "ECS/Components/Renderer.h"
 #include "MyMath.h"
 
 class Entity
