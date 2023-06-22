@@ -1,0 +1,32 @@
+#include "RenderSystem.h"
+#include <SDL.h>
+
+RenderSystem::RenderSystem(SDL_Renderer* renderer) : m_renderer(renderer) {}
+
+    void Update(ECSManager& ecs)
+    {
+        for (int e = 1; e <= max_entities; e++)
+        {
+            if (ecs.renderComponents.contains(e) && ecs.transformComponents.contains(e))
+            {
+                ecs.renderComponents[e].dstRect.x = ecs.transformComponents[e].position.X;
+                ecs.renderComponents[e].dstRect.y = ecs.transformComponents[e].position.Y;
+            }
+        }
+    }
+    void Render(ECSManager& ecs, SDL_Renderer* renderer)
+    {
+        for (int e = 1; e <= max_entities; e++)
+        {
+            if (ecs.renderComponents.contains(e))
+            {
+                SDL_RenderCopy(
+                    renderer,
+                    ecs.renderComponents[e].texture,
+                    &ecs.renderComponents[e].srcRect,
+                    &ecs.renderComponents[e].dstRect
+                );
+            }
+        }
+    }
+

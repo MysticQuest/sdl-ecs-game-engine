@@ -1,25 +1,10 @@
-#pragma once
+using Entity = std::size_t;
+Entity max_entities = 200000;
 
-#include <SDL.h>
-#include "ECS/Components/Renderer.h"
-#include "MyMath.h"
-
-class Entity
+std::size_t create_entity()
 {
-public:
-	Entity(Transform transform, int width, int height, Vector2f velocity, SDL_Texture* texture, SDL_RendererFlip flip = SDL_FLIP_NONE);
-	const Transform& GetPos() const { return m_transform; }
-	SDL_Texture* GetTexture() const;
-	SDL_Rect GetRect() const;
-	bool needsUpdate = false;
-
-	void Update(float deltaTime);
-
-private:
-	Transform m_transform;
-	int m_width, m_height;
-	Vector2f m_velocity;
-	SDL_Rect m_sdlRect;
-	SDL_Texture* m_texture;
-	SDL_RendererFlip m_flip;
-};
+    static std::size_t entities = 0;
+    ++entities;
+    max_entities = entities;
+    return entities;
+}
