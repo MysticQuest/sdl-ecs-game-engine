@@ -3,7 +3,7 @@
 
 RenderSystem::RenderSystem(SDL_Renderer* renderer) : m_renderer(renderer) {}
 
-    void Update(ECSManager& ecs)
+    void RenderSystem::Update(ECSManager& ecs)
     {
         for (int e = 1; e <= max_entities; e++)
         {
@@ -14,7 +14,7 @@ RenderSystem::RenderSystem(SDL_Renderer* renderer) : m_renderer(renderer) {}
             }
         }
     }
-    void Render(ECSManager& ecs, SDL_Renderer* renderer)
+    void RenderSystem::Render(ECSManager& ecs, SDL_Renderer* renderer)
     {
         for (int e = 1; e <= max_entities; e++)
         {

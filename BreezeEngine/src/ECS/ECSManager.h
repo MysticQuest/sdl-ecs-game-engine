@@ -1,9 +1,9 @@
 #include <vector>
 #include <unordered_map>
 #include "Entity.h"
-#include "Components/TransformComponent.h"
-#include "Components/MotionComponent.h"
 #include "Components/RenderComponent.h"
+#include "Components/TransformComponent.h"
+#include "Components/InputComponent.h"
 
 class ECSManager
 {
@@ -20,9 +20,9 @@ public:
     template <typename T>
     T& GetComponent(Entity entity);
 
-    std::unordered_map<Entity, TransformComponent> transformComponents;
-    std::unordered_map<Entity, MotionComponent> motionComponents;
     std::unordered_map<Entity, RenderComponent> renderComponents;
+    std::unordered_map<Entity, TransformComponent> transformComponents;
+    std::unordered_map<Entity, InputComponent> inputComponents;
 
 private:
 
