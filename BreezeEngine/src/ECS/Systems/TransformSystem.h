@@ -1,7 +1,10 @@
 #include "../ECSManager.h"
 
-class MotionSystem
+class TransformSystem
 {
 public:
-    void Update(ECSManager& ecsManager, float deltaTime);
+    void Update(ECSManager& ecs);
+
+private:
+    float dt = 0.1f;
 };
