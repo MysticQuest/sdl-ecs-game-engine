@@ -1,6 +1,5 @@
-#pragma once
+#include "Entity.h"
 
-using Entity = std::size_t;
 Entity max_entity = 0;
 
 std::size_t create_entity()
