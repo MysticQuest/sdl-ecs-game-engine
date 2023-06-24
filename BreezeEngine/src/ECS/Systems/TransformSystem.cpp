@@ -1,6 +1,6 @@
 #include "TransformSystem.h"
 
-void TransformSystem::Update(ECSManager& ecs)
+void TransformSystem::Update(ECSManager& ecs, int deltaTime)
 {
     for (int e = 1; e <= max_entities; e++)
     {
