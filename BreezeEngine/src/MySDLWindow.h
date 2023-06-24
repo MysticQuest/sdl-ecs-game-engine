@@ -3,6 +3,8 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include "Entity.h"
+#include "ECS/ECSManager.h"
+#include "ECS/Systems/RenderSystem.h"
 
 struct MySDLWindow
 {
@@ -12,11 +14,17 @@ public:
 
 	SDL_Texture* LoadTexture(const char* filePath);
 	void Clear();
-	void Render(const Entity& entity);
+	void Render(ECSManager& ecs);
 	void Display();
 	void Clean();
+
+	SDL_Renderer* GetRenderer()
+	{
+		return renderer;
+	}
 
 private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
+	RenderSystem* renderSystem;
 };

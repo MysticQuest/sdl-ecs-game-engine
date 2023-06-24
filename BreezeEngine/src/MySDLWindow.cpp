@@ -37,21 +37,9 @@ void MySDLWindow::Clear()
 	SDL_RenderClear(renderer);
 }
 
-void MySDLWindow::Render(const Entity& entity)
+void MySDLWindow::Render(ECSManager& ecs)
 {
-	SDL_Rect srcRect;
-	srcRect.x = entity.GetRect().x;
-	srcRect.y = entity.GetRect().y;
-	srcRect.w = entity.GetRect().w;
-	srcRect.h = entity.GetRect().h;
-
-	SDL_FRect dstRect;
-	dstRect.x = entity.GetPos().X;
-	dstRect.y = entity.GetPos().Y;
-	dstRect.w = static_cast<float>(entity.GetRect().w);
-	dstRect.h = static_cast<float>(entity.GetRect().h);
-
-	SDL_RenderCopyF(renderer, entity.GetTexture(), &srcRect, &dstRect);
+	renderSystem->Render(ecs, renderer);
 }
 
 void MySDLWindow::Display()
