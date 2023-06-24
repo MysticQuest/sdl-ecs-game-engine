@@ -24,4 +24,5 @@ private:
 	std::vector<Entity> entities;
 	int m_frame_rate = 0;
 	bool isRunning = true;
+	const Uint8* keystates = SDL_GetKeyboardState(NULL);
 };
