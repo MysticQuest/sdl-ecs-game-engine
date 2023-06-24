@@ -1,5 +1,5 @@
-#include "RenderSystem.h"
 #include <SDL.h>
+#include "RenderSystem.h"
 
 RenderSystem::RenderSystem(SDL_Renderer* renderer) : m_renderer(renderer) {}
 
