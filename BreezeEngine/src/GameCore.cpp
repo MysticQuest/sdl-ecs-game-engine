@@ -60,6 +60,8 @@ void GameCore::Run(MySDLWindow& sdlWindow)
         SDL_Rect{ 10, 10, 100, 73 },
         sdlWindow.LoadTexture("res/textures/pac1.png")
         });
+    ecs.AddComponent(testEntity, TransformComponent{Vector2f(10, 10), Vector2f(0, 0), Vector2f(90, 90), Vector2(100, 100)});
+    ecs.AddComponent(testEntity, InputComponent{});
 
 
 
