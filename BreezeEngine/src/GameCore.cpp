@@ -18,7 +18,7 @@ void GameCore::PollEvents()
     SDL_Event event;
     SDL_PollEvent(&event);
 
-    if (event.type == SDL_QUIT)
+    if (keystates[SDL_SCANCODE_ESCAPE] || event.type == SDL_QUIT)
     {
         isRunning = false;
     }
