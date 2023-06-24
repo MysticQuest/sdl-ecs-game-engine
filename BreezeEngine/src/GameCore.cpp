@@ -4,6 +4,7 @@
 
 GameCore::GameCore(MySDLWindow& sdlWindow, int frame_rate)
 {
+    renderSystem = std::make_unique<RenderSystem>(sdlWindow.GetRenderer());
     m_frame_rate = frame_rate;
     Run(sdlWindow);
 }
@@ -27,35 +28,31 @@ void GameCore::PollEvents()
 void GameCore::Render(MySDLWindow& sdlWindow, const std::vector<Entity>& entities)
 {
     sdlWindow.Clear();
-    for (const Entity& entity : entities)
-    {
-        sdlWindow.Render(entity);
-    }
+    sdlWindow.Render(ecs);
     sdlWindow.Display();
 }
 
 void GameCore::AddEntity(Transform& transform, int width, int height, Vector2f velocity, SDL_Texture* texture, SDL_RendererFlip flip)
 {
-    entities.push_back(Entity(transform, width, height, velocity, texture, flip));
+    /*entities.push_back(Entity(transform, width, height, velocity, texture, flip));*/
 }
 
 void GameCore::Update(int deltaTime)
 {
-    for (Entity& entity : entities)
-    {
-        entity.Update(deltaTime);
-    }
+    renderSystem->Update(ecs);
+    transformSystem.Update(ecs);
+    inputSystem.Update(ecs);
 }
 
 void GameCore::Run(MySDLWindow& sdlWindow)
 {
-    SDL_Texture* testTexture = sdlWindow.LoadTexture("res/textures/pac1.png");
-    entities.reserve(200);
+    //SDL_Texture* testTexture = sdlWindow.LoadTexture("res/textures/pac1.png");
+    //entities.reserve(200);
   
-    for (int i = 0; i < 200; ++i)
-    {
-        entities.push_back(Entity(Transform(RNG::Float(0, 1000), RNG::Float(0, 1000)), 32, 32, Vector2f(5, 5), testTexture, SDL_FLIP_NONE));
-    }
+    //for (int i = 0; i < 200; ++i)
+    //{
+    //    entities.push_back(Entity(Transform(RNG::Float(0, 1000), RNG::Float(0, 1000)), 32, 32, Vector2f(5, 5), testTexture, SDL_FLIP_NONE));
+    //}
 
     Uint32 before, second = SDL_GetTicks(), after;
     int deltaTime = 0;
