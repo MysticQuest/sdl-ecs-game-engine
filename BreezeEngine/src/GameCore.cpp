@@ -54,6 +54,8 @@ void GameCore::Run(MySDLWindow& sdlWindow)
     //    entities.push_back(Entity(Transform(RNG::Float(0, 1000), RNG::Float(0, 1000)), 32, 32, Vector2f(5, 5), testTexture, SDL_FLIP_NONE));
     //}
 
+    Entity bird = create_entity();
+
     Uint32 before, second = SDL_GetTicks(), after;
     int deltaTime = 0;
     int frames = 0;
