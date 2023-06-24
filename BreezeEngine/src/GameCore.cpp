@@ -40,7 +40,7 @@ void GameCore::AddEntity(Transform& transform, int width, int height, Vector2f v
 void GameCore::Update(int deltaTime)
 {
     renderSystem->Update(ecs);
-    transformSystem.Update(ecs);
+    transformSystem.Update(ecs, deltaTime);
     inputSystem.Update(ecs);
 }
 

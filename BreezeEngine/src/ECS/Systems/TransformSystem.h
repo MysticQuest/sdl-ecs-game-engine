@@ -3,8 +3,5 @@
 class TransformSystem
 {
 public:
-    void Update(ECSManager& ecs);
-
-private:
-    float dt = 0.1f;
+    void Update(ECSManager& ecs, int deltaTime);
 };
