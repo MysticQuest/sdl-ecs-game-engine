@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -72,7 +72,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(ProjectDir)</OutDir>
-    <IncludePath>$(ProjectDir)include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>$(ProjectDir)src;$(ProjectDir)include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
     <LibraryPath>$(ProjectDir)lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -151,7 +151,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\BreezeAPI.h" />
-    <ClInclude Include="src\Entity.h" />
+    <ClInclude Include="src\ECS\Components\InputComponent.h" />
+    <ClInclude Include="src\ECS\Components\RenderComponent.h" />
+    <ClInclude Include="src\ECS\Components\TransformComponent.h" />
+    <ClInclude Include="src\ECS\ECSManager.h" />
+    <ClInclude Include="src\ECS\Entity.h" />
+    <ClInclude Include="src\ECS\Systems\InputSystem.h" />
+    <ClInclude Include="src\ECS\Systems\TransformSystem.h" />
+    <ClInclude Include="src\ECS\Systems\RenderSystem.h" />
     <ClInclude Include="src\Export.h" />
     <ClInclude Include="src\GameCore.h" />
     <ClInclude Include="src\MyMath.h" />
@@ -161,7 +168,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BreezeAPI.cpp" />
-    <ClCompile Include="src\Entity.cpp" />
+    <ClCompile Include="src\ECS\ECSManager.cpp" />
+    <ClCompile Include="src\ECS\Entity.cpp" />
+    <ClCompile Include="src\ECS\Systems\InputSystem.cpp" />
+    <ClCompile Include="src\ECS\Systems\RenderSystem.cpp" />
+    <ClCompile Include="src\ECS\Systems\TransformSystem.cpp" />
     <ClCompile Include="src\GameCore.cpp" />
     <ClCompile Include="src\MyMath.cpp" />
     <ClCompile Include="src\MySDLWindow.cpp" />
