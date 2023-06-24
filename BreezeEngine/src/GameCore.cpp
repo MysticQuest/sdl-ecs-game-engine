@@ -54,7 +54,14 @@ void GameCore::Run(MySDLWindow& sdlWindow)
     //    entities.push_back(Entity(Transform(RNG::Float(0, 1000), RNG::Float(0, 1000)), 32, 32, Vector2f(5, 5), testTexture, SDL_FLIP_NONE));
     //}
 
-    Entity bird = create_entity();
+    Entity testEntity = create_entity();
+    ecs.AddComponent(testEntity, RenderComponent{
+        SDL_Rect{ 0, 0, 300, 230 },
+        SDL_Rect{ 10, 10, 100, 73 },
+        sdlWindow.LoadTexture("res/textures/pac1.png")
+        });
+
+
 
     Uint32 before, second = SDL_GetTicks(), after;
     int deltaTime = 0;
