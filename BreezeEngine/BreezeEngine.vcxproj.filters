@@ -67,9 +67,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Entity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\MyMath.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

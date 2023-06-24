@@ -4,7 +4,7 @@ void InputSystem::Update(ECSManager& ecs)
 {
     const Uint8* keys = SDL_GetKeyboardState(NULL);
 
-    for (int e = 1; e <= max_entities; e++)
+    for (int e = 1; e <= max_entity; e++)
     {
         if (ecs.transformComponents.contains(e) && ecs.inputComponents.contains(e))
         {

@@ -172,7 +172,6 @@
     <ClCompile Include="src\ECS\Systems\InputSystem.cpp" />
     <ClCompile Include="src\ECS\Systems\RenderSystem.cpp" />
     <ClCompile Include="src\ECS\Systems\TransformSystem.cpp" />
-    <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="src\GameCore.cpp" />
     <ClCompile Include="src\MyMath.cpp" />
     <ClCompile Include="src\MySDLWindow.cpp" />

@@ -5,7 +5,7 @@ RenderSystem::RenderSystem(SDL_Renderer* renderer) : m_renderer(renderer) {}
 
 void RenderSystem::Update(ECSManager& ecs)
 {
-    for (int e = 1; e <= max_entities; e++)
+    for (int e = 1; e <= max_entity; e++)
     {
         if (ecs.renderComponents.contains(e) && ecs.transformComponents.contains(e))
         {
@@ -16,7 +16,7 @@ void RenderSystem::Update(ECSManager& ecs)
 }
 void RenderSystem::Render(ECSManager& ecs, SDL_Renderer* renderer)
 {
-    for (int e = 1; e <= max_entities; e++)
+    for (int e = 1; e <= max_entity; e++)
     {
         if (ecs.renderComponents.contains(e))
         {

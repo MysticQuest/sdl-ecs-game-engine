@@ -15,7 +15,7 @@ public:
     ~BreezeAPI();
     void Run();
 
-    void AddEntity(Transform transform, int width, int height, Vector2f velocity, SDL_Texture* texture, int flip);
+    //void AddEntity(Transform transform, int width, int height, Vector2f velocity, SDL_Texture* texture, int flip);
 
 private:
     std::unique_ptr<SettingsResolver> settings;
