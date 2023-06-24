@@ -1,0 +1,6 @@
+
+
+class GameEntity : public Entity
+{
+
+};

@@ -2,7 +2,10 @@
 
 #include <SDL.h>
 #include "MySDLWindow.h"
-#include "Entity.h"
+//#include "ECS/ECSManager.h"
+#include "ECS/Systems/RenderSystem.h"
+#include "ECS/Systems/TransformSystem.h"
+#include "ECS/Systems/InputSystem.h"
 #include "MyMath.h"
 #include "Utils.h"
 
@@ -24,4 +27,11 @@ private:
 	std::vector<Entity> entities;
 	int m_frame_rate = 0;
 	bool isRunning = true;
+	const Uint8* keystates = SDL_GetKeyboardState(NULL);
+
+	ECSManager ecs;
+	std::unique_ptr<RenderSystem> renderSystem;
+	TransformSystem transformSystem;
+	InputSystem inputSystem;
+	 
 };
