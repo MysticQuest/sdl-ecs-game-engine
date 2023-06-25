@@ -17,5 +17,8 @@
     <ClInclude Include="src\World.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\GameEntity.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

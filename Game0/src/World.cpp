@@ -2,6 +2,6 @@
 
 World::World()
 {
-	BreezeAPI breezeAPI("settings.ini", "Test Title");
+	BreezeAPI breezeAPI("engine.ini", "Sample Game 1");
 	breezeAPI.Run();
 }

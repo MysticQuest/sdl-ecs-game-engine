@@ -2,7 +2,6 @@
 
 #include <SDL.h>
 #include <SDL_image.h>
-//#include "ECS/ECSManager.h"
 #include "ECS/Systems/RenderSystem.h"
 
 struct MySDLWindow
