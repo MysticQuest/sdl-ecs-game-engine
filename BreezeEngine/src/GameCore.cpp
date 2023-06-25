@@ -9,10 +9,7 @@ GameCore::GameCore(MySDLWindow& sdlWindow, int frame_rate)
     Run(sdlWindow);
 }
 
-GameCore::~GameCore() 
-{
-
-}
+GameCore::~GameCore() { }
 
 void GameCore::PollEvents()
 {
@@ -32,11 +29,6 @@ void GameCore::Render(MySDLWindow& sdlWindow, const std::vector<Entity>& entitie
     sdlWindow.Display();
 }
 
-void GameCore::AddEntity(Transform& transform, int width, int height, Vector2f velocity, SDL_Texture* texture, SDL_RendererFlip flip)
-{
-    /*entities.push_back(Entity(transform, width, height, velocity, texture, flip));*/
-}
-
 void GameCore::Update(int deltaTime)
 {
     renderSystem->Update(ecs);
@@ -46,14 +38,6 @@ void GameCore::Update(int deltaTime)
 
 void GameCore::Run(MySDLWindow& sdlWindow)
 {
-    //SDL_Texture* testTexture = sdlWindow.LoadTexture("res/textures/pac1.png");
-    //entities.reserve(200);
-  
-    //for (int i = 0; i < 200; ++i)
-    //{
-    //    entities.push_back(Entity(Transform(RNG::Float(0, 1000), RNG::Float(0, 1000)), 32, 32, Vector2f(5, 5), testTexture, SDL_FLIP_NONE));
-    //}
-
     Entity testEntity = create_entity();
     ecs.AddComponent(testEntity, RenderComponent{
         SDL_Rect{ 0, 0, 300, 230 },
@@ -62,7 +46,6 @@ void GameCore::Run(MySDLWindow& sdlWindow)
         });
     ecs.AddComponent(testEntity, TransformComponent{Vector2f(10, 10), Vector2f(0, 0), Vector2f(90, 90), Vector2(100, 100)});
     ecs.AddComponent(testEntity, InputComponent{});
-
 
 
     Uint32 before, second = SDL_GetTicks(), after;
