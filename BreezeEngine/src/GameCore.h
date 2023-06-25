@@ -20,15 +20,15 @@ public:
 	void Update(int deltaTime);
 	void Run(MySDLWindow& sdlWindow);
 
+	ECSManager ecs;
+
 private:
 	std::vector<Entity> entities;
 	int m_frame_rate = 0;
 	bool isRunning = true;
 	const Uint8* keystates = SDL_GetKeyboardState(NULL);
 
-	ECSManager ecs;
 	std::unique_ptr<RenderSystem> renderSystem;
-	TransformSystem transformSystem;
-	InputSystem inputSystem;
-	 
+	std::unique_ptr<TransformSystem> transformSystem;
+	std::unique_ptr<InputSystem> inputSystem;
 };
