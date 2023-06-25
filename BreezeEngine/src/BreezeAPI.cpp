@@ -1,6 +1,8 @@
 #include "SettingsResolver.h"
 #include "MySDLWindow.h"
 #include "GameCore.h"
+#include "ECS/Entity.h"
+#include "ECS/ECSManager.h"
 #include "BreezeAPI.h"
 
 BreezeAPI::BreezeAPI(const std::string& settingsFile, const char* title)
@@ -9,17 +11,17 @@ BreezeAPI::BreezeAPI(const std::string& settingsFile, const char* title)
     Config config = settings->ReadSettings(settingsFile);
     window = std::make_unique<MySDLWindow>(title, config.width, config.height);
     game = std::make_unique<GameCore>(*window, config.frame_rate);
+    ecs = std::make_unique<ECSManager>();
 }
 
 BreezeAPI::~BreezeAPI() = default;
+
+void BreezeAPI::Init()
+{
+   
+}
 
 void BreezeAPI::Run()
 {
     game->Run(*window);
 }
-
-//void BreezeAPI::AddEntity(Transform transform, int width, int height, Vector2f velocity, SDL_Texture* texture, int flip)
-//{
-//    SDL_RendererFlip sdlFlip = static_cast<SDL_RendererFlip>(flip);
-//    game->AddEntity(transform, width, height, velocity, texture, sdlFlip);
-//}
