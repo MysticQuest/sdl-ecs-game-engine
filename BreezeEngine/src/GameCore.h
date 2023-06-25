@@ -2,7 +2,6 @@
 
 #include <SDL.h>
 #include "MySDLWindow.h"
-//#include "ECS/ECSManager.h"
 #include "ECS/Systems/RenderSystem.h"
 #include "ECS/Systems/TransformSystem.h"
 #include "ECS/Systems/InputSystem.h"
