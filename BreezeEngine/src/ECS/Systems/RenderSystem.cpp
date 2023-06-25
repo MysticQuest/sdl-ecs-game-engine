@@ -11,6 +11,8 @@ void RenderSystem::Update(ECSManager& ecs)
         {
             ecs.renderComponents[e].dstRect.x = ecs.transformComponents[e].position.X;
             ecs.renderComponents[e].dstRect.y = ecs.transformComponents[e].position.Y;
+            //ecs.renderComponents[e].dstRect.w *= ecs.transformComponents[e].scale.X;
+            //ecs.renderComponents[e].dstRect.h *= ecs.transformComponents[e].scale.Y;
         }
     }
 }
