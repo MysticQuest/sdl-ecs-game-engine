@@ -8,5 +8,9 @@ class World
 public:
 	World();
 
+	BreezeAPI breezeAPI;
+
 private:
+	void Init();
+	void Update();
 };
