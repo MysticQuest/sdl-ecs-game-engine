@@ -4,9 +4,9 @@
 
 GameCore::GameCore(MySDLWindow& sdlWindow, int frame_rate)
 {
+    ecs = ECSManager();
     renderSystem = std::make_unique<RenderSystem>(sdlWindow.GetRenderer());
     m_frame_rate = frame_rate;
-    Run(sdlWindow);
 }
 
 GameCore::~GameCore() { }
@@ -32,8 +32,8 @@ void GameCore::Render(MySDLWindow& sdlWindow, const std::vector<Entity>& entitie
 void GameCore::Update(int deltaTime)
 {
     renderSystem->Update(ecs);
-    transformSystem.Update(ecs, deltaTime);
-    inputSystem.Update(ecs);
+    transformSystem->Update(ecs, deltaTime);
+    inputSystem->Update(ecs);
 }
 
 void GameCore::Run(MySDLWindow& sdlWindow)

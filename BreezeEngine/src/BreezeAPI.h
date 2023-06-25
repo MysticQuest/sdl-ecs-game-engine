@@ -18,14 +18,14 @@ public:
     void Init();
     void Run();
     
-    Entity& AddEntity();
-    void AddTranform(Entity& entity, Vector2f pos, Vector2f vel, Vector2 scale);
-    void AddRenderer(Entity& entity, const char* texturePath);
-    void AddInput(Entity& entity);
+    Entity AddEntity();
+    void AddTranform(Entity entity, Vector2f pos, Vector2f vel, Vector2 scale);
+    void AddRenderer(Entity entity, const char* texturePath);
+    void AddInput(Entity entity);
 
 private:
+    ECSManager* ecs;
     std::unique_ptr<SettingsResolver> settings;
     std::unique_ptr<MySDLWindow> sdl;
     std::unique_ptr<GameCore> game;
-    std::unique_ptr<ECSManager> ecs;
 };

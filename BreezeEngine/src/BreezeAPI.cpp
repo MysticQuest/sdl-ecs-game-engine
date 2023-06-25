@@ -10,7 +10,7 @@ BreezeAPI::BreezeAPI(const std::string& settingsFile, const char* title)
     Config config = settings->ReadSettings(settingsFile);
     sdl = std::make_unique<MySDLWindow>(title, config.width, config.height);
     game = std::make_unique<GameCore>(*sdl, config.frame_rate);
-    ecs = std::make_unique<ECSManager>();
+    ecs = &(game->ecs);
 }
 
 BreezeAPI::~BreezeAPI() = default;
@@ -25,13 +25,14 @@ void BreezeAPI::Run()
     game->Run(*sdl);
 }
 
-Entity& BreezeAPI::AddEntity()
+Entity BreezeAPI::AddEntity()
 {
-    Entity testEntity = create_entity();
-    return testEntity;
+    Entity entity = create_entity();
+    std::cout << "Created Entity with ID: " << entity << std::endl;
+    return entity;
 }
 
-void BreezeAPI::AddTranform(Entity& entity, Vector2f pos, Vector2f vel, Vector2 scale)
+void BreezeAPI::AddTranform(Entity entity, Vector2f pos, Vector2f vel, Vector2 scale)
 {
     ecs->AddComponent(entity, TransformComponent{
         pos,
@@ -41,7 +42,7 @@ void BreezeAPI::AddTranform(Entity& entity, Vector2f pos, Vector2f vel, Vector2 
         });
 }
 
-void BreezeAPI::AddRenderer(Entity& entity, const char* texturePath)
+void BreezeAPI::AddRenderer(Entity entity, const char* texturePath)
 {
     SDL_Texture* texture = sdl->LoadTexture(texturePath);
     ecs->AddComponent(entity, RenderComponent{
@@ -51,7 +52,7 @@ void BreezeAPI::AddRenderer(Entity& entity, const char* texturePath)
         });
 }
 
-void BreezeAPI::AddInput(Entity& entity)
+void BreezeAPI::AddInput(Entity entity)
 {
     ecs->AddComponent(entity, InputComponent{});
 }
