@@ -1,7 +1,7 @@
 # Breeze engine (WIP)
-A game engine wanna-be using SDL.
+A simple ECS game engine using SDL.
 
-This repo contains a VS solution made of two (as of yet) projects.
+This repo contains a VS solution made of two (as of yet) distinct projects.
 - An engine (.dll project) dependency.
 - A sample game (windows application).
 
