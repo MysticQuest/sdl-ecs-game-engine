@@ -2,6 +2,7 @@
 #include <iostream>
 #include "MyMath.h"
 #include "ECS/Entity.h"
+#include "ControlSchemes.h"
 #include "Export.h"
 
 class SettingsResolver;
@@ -21,7 +22,7 @@ public:
     Entity AddEntity();
     void AddTranform(Entity entity, Vector2f pos, Vector2f vel, Vector2 scale);
     void AddRenderer(Entity entity, const char* texturePath);
-    void AddInput(Entity entity);
+    void AddInput(Entity entity, int controlScheme);
 
 private:
     ECSManager* ecs;

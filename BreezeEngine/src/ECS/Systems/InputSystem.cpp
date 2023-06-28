@@ -1,3 +1,4 @@
+#include "ControlSchemes.h"
 #include "InputSystem.h"
 
 void InputSystem::Update(ECSManager& ecs)
@@ -8,11 +9,25 @@ void InputSystem::Update(ECSManager& ecs)
     {
         if (ecs.transformComponents.contains(e) && ecs.inputComponents.contains(e))
         {
+            auto& inputComponent = ecs.inputComponents[e];
+            auto& transformComponent = ecs.transformComponents[e];
 
-            if (keys[SDL_SCANCODE_A]) { ecs.transformComponents[e].position.X -= 1.0f; }
-            if (keys[SDL_SCANCODE_S]) { ecs.transformComponents[e].position.Y += 1.0f; }
-            if (keys[SDL_SCANCODE_W]) { ecs.transformComponents[e].position.Y -= 1.0f; }
-            if (keys[SDL_SCANCODE_D]) { ecs.transformComponents[e].position.X += 1.0f; }
+            if (inputComponent.controlScheme[ACTION_LEFT] && keys[SDL_SCANCODE_A])
+            {
+                transformComponent.position.X -= 1.0f;
+            }
+            if (inputComponent.controlScheme[ACTION_DOWN] && keys[SDL_SCANCODE_S])
+            {
+                transformComponent.position.Y += 1.0f;
+            }
+            if (inputComponent.controlScheme[ACTION_UP] && keys[SDL_SCANCODE_W])
+            {
+                transformComponent.position.Y -= 1.0f;
+            }
+            if (inputComponent.controlScheme[ACTION_RIGHT] && keys[SDL_SCANCODE_D])
+            {
+                transformComponent.position.X += 1.0f;
+            }
         }
     }
 }

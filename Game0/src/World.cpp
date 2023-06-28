@@ -16,7 +16,7 @@ void World::Init()
 	OutputDebugString(message.c_str());
 	breezeAPI.AddRenderer(entity, "res/textures/pac1.png");
 	breezeAPI.AddTranform(entity, Vector2f(300, 300), Vector2f(0, 0), Vector2(1, 1));
-	breezeAPI.AddInput(entity);
+	breezeAPI.AddInput(entity, CONTROL_SCHEME_X);
 }
 
 void World::Update()
