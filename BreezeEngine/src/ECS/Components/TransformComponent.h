@@ -6,6 +6,6 @@ struct TransformComponent
 {
 	Vector2f position;
 	Vector2f velocity;
-	Vector2f rotation;
-	Vector2 scale { 1, 1 };
+	float rotation = 0.0f;
+	Vector2f scale { 1, 1 };
 };

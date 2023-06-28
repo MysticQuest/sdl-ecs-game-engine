@@ -15,7 +15,7 @@ void World::Init()
 	std::wstring message = L"Added Entity with id: " + std::to_wstring(entity) + L'\n';
 	OutputDebugString(message.c_str());
 	breezeAPI.AddRenderer(entity, "res/textures/pac1.png");
-	breezeAPI.AddTranform(entity, Vector2f(300, 300), Vector2f(0, 0), Vector2(1, 1));
+	breezeAPI.AddTranform(entity, Vector2f(300, 300), Vector2f(0, 0), 90, Vector2f(1.5, 0.5f));
 	breezeAPI.AddInput(entity, CONTROL_SCHEME_X);
 }
 
