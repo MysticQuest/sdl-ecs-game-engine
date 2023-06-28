@@ -65,6 +65,9 @@
     <ClInclude Include="src\ECS\Entity.h">
       <Filter>Source Files\ECS</Filter>
     </ClInclude>
+    <ClInclude Include="src\ControlSchemes.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MyMath.cpp">

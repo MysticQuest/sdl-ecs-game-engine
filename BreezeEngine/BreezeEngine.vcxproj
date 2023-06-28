@@ -151,6 +151,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\BreezeAPI.h" />
+    <ClInclude Include="src\ControlSchemes.h" />
     <ClInclude Include="src\ECS\Components\InputComponent.h" />
     <ClInclude Include="src\ECS\Components\RenderComponent.h" />
     <ClInclude Include="src\ECS\Components\TransformComponent.h" />
