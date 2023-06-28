@@ -20,7 +20,7 @@ public:
     void Run();
     
     Entity AddEntity();
-    void AddTranform(Entity entity, Vector2f pos, Vector2f vel, Vector2 scale);
+    void AddTranform(Entity entity, Vector2f pos, Vector2f vel, float rot, Vector2f scale);
     void AddRenderer(Entity entity, const char* texturePath);
     void AddInput(Entity entity, int controlScheme);
 

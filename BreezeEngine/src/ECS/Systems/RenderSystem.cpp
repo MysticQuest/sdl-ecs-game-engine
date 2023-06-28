@@ -22,11 +22,27 @@ void RenderSystem::Render(ECSManager& ecs, SDL_Renderer* renderer)
     {
         if (ecs.renderComponents.contains(e))
         {
-            SDL_RenderCopy(
+            // Create a copy of the dstRect to apply scaling
+            SDL_Rect scaledDstRect = ecs.renderComponents[e].dstRect;
+
+            // Apply scaling
+            scaledDstRect.w = static_cast<int>(scaledDstRect.w * ecs.transformComponents[e].scale.X);
+            scaledDstRect.h = static_cast<int>(scaledDstRect.h * ecs.transformComponents[e].scale.Y);
+
+            // Retrieve rotation information
+            double angle = static_cast<double>(ecs.transformComponents[e].rotation); // Now rotation is a single value representing the angle
+            SDL_Point center = { ecs.renderComponents[e].dstRect.w / 2, ecs.renderComponents[e].dstRect.h / 2 };
+            SDL_RendererFlip flip = SDL_FLIP_NONE;
+
+            // Render with rotation and scaling
+            SDL_RenderCopyEx(
                 renderer,
                 ecs.renderComponents[e].texture,
                 &ecs.renderComponents[e].srcRect,
-                &ecs.renderComponents[e].dstRect
+                &scaledDstRect,
+                angle,
+                &center,
+                flip
             );
         }
     }
