@@ -1,3 +1,7 @@
+# game libraries
+!SDL2.dll
+!SDL2_image.dll
+
 # Prerequisites
 *.d
 
