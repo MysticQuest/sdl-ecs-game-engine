@@ -38,21 +38,6 @@ void GameCore::Update(int deltaTime)
 
 void GameCore::Run(MySDLWindow& sdlWindow)
 {
-    //Entity testEntity = create_entity();
-    //ecs.AddComponent(testEntity, RenderComponent{
-    //    SDL_Rect{ 0, 0, 300, 300 },
-    //    SDL_Rect{ 10, 10, 100, 100 },
-    //    sdlWindow.LoadTexture("res/textures/pac1.png")
-    //    });
-    //ecs.AddComponent(testEntity, TransformComponent{
-    //    Vector2f(10, 10),
-    //    Vector2f(0, 0),
-    //    Vector2f(90, 90),
-    //    Vector2(5, 5)
-    //    });
-    //ecs.AddComponent(testEntity, InputComponent{});
-
-
     Uint32 before, second = SDL_GetTicks(), after;
     int deltaTime = 0;
     int frames = 0;
