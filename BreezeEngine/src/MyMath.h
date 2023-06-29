@@ -76,6 +76,14 @@ struct Transform
 	float X, Y;
 };
 
+struct AABB
+{
+	float x;
+	float y;
+	float width;
+	float height;
+};
+
 class RNG
 {
 public:
