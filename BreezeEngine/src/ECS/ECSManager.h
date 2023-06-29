@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include "Entity.h"
 #include "Components/RenderComponent.h"
+#include "Components/CollisionComponent.h"
 #include "Components/TransformComponent.h"
 #include "Components/InputComponent.h"
 
@@ -16,7 +17,8 @@ public:
         static_assert(
             std::is_same<T, RenderComponent>::value ||
             std::is_same<T, TransformComponent>::value ||
-            std::is_same<T, InputComponent>::value,
+            std::is_same<T, InputComponent>::value ||
+            std::is_same<T, CollisionComponent>::value,
             "Invalid component type."
             );
 
@@ -29,7 +31,8 @@ public:
         static_assert(
             std::is_same<T, RenderComponent>::value ||
             std::is_same<T, TransformComponent>::value ||
-            std::is_same<T, InputComponent>::value,
+            std::is_same<T, InputComponent>::value ||
+            std::is_same<T, CollisionComponent>::value,
             "Invalid component type."
             );
 
@@ -42,7 +45,8 @@ public:
         static_assert(
             std::is_same<T, RenderComponent>::value ||
             std::is_same<T, TransformComponent>::value ||
-            std::is_same<T, InputComponent>::value,
+            std::is_same<T, InputComponent>::value ||
+            std::is_same<T, CollisionComponent>::value,
             "Invalid component type."
             );
 
@@ -52,6 +56,7 @@ public:
     std::unordered_map<Entity, RenderComponent> renderComponents;
     std::unordered_map<Entity, TransformComponent> transformComponents;
     std::unordered_map<Entity, InputComponent> inputComponents;
+    std::unordered_map<Entity, CollisionComponent> collisionComponents;
 
 private:
     template<typename T>
@@ -77,5 +82,10 @@ private:
     {
         return inputComponents;
     }
-};
 
+    template<>
+    std::unordered_map<Entity, CollisionComponent>& GetComponentMap<CollisionComponent>()
+    {
+        return collisionComponents;
+    }
+};
