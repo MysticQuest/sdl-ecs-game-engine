@@ -2,7 +2,7 @@
 #include "MySDLWindow.h"
 
 MySDLWindow::MySDLWindow(const char* title, int window_width, int window_height)
-:window(nullptr), renderer(nullptr)
+:window(nullptr), renderer(nullptr), renderSystem(nullptr)
 {
 	window = SDL_CreateWindow
 	(

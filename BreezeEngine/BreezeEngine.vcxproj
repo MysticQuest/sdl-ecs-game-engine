@@ -152,11 +152,13 @@
   <ItemGroup>
     <ClInclude Include="src\BreezeAPI.h" />
     <ClInclude Include="src\ControlSchemes.h" />
+    <ClInclude Include="src\ECS\Components\CollisionComponent.h" />
     <ClInclude Include="src\ECS\Components\InputComponent.h" />
     <ClInclude Include="src\ECS\Components\RenderComponent.h" />
     <ClInclude Include="src\ECS\Components\TransformComponent.h" />
     <ClInclude Include="src\ECS\ECSManager.h" />
     <ClInclude Include="src\ECS\Entity.h" />
+    <ClInclude Include="src\ECS\Systems\CollisionSystem.h" />
     <ClInclude Include="src\ECS\Systems\InputSystem.h" />
     <ClInclude Include="src\ECS\Systems\TransformSystem.h" />
     <ClInclude Include="src\ECS\Systems\RenderSystem.h" />
@@ -171,6 +173,7 @@
     <ClCompile Include="src\BreezeAPI.cpp" />
     <ClCompile Include="src\ECS\ECSManager.cpp" />
     <ClCompile Include="src\ECS\Entity.cpp" />
+    <ClCompile Include="src\ECS\Systems\CollisionSystem.cpp" />
     <ClCompile Include="src\ECS\Systems\InputSystem.cpp" />
     <ClCompile Include="src\ECS\Systems\RenderSystem.cpp" />
     <ClCompile Include="src\ECS\Systems\TransformSystem.cpp" />

@@ -10,19 +10,19 @@ class MySDLWindow;
 class GameCore;
 class ECSManager;
 
-class BREEZEENGINE_API BreezeAPI
+class BreezeAPI
 {
 public:
-    BreezeAPI(const std::string& settingsFile, const char* title);
-    ~BreezeAPI();
+    BREEZEENGINE_API BreezeAPI(const std::string& settingsFile, const char* title);
+    BREEZEENGINE_API ~BreezeAPI();
 
-    void Init();
-    void Run();
+    BREEZEENGINE_API void Init();
+    BREEZEENGINE_API void Run();
     
-    Entity AddEntity();
-    void AddTranform(Entity entity, Vector2f pos, Vector2f vel, float rot, Vector2f scale);
-    void AddRenderer(Entity entity, const char* texturePath);
-    void AddInput(Entity entity, int controlScheme);
+    BREEZEENGINE_API Entity AddEntity();
+    BREEZEENGINE_API void AddTranform(Entity entity, Vector2f pos, Vector2f vel, float rot, Vector2f scale);
+    BREEZEENGINE_API void AddRenderer(Entity entity, const char* texturePath);
+    BREEZEENGINE_API void AddInput(Entity entity, int controlScheme);
 
 private:
     ECSManager* ecs;
