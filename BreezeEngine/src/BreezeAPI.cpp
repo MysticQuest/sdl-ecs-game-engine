@@ -52,10 +52,11 @@ void BreezeAPI::AddRenderer(Entity entity, const char* texturePath)
         });
 }
 
-void BreezeAPI::AddInput(Entity entity, int controlScheme)
+void BreezeAPI::AddInput(Entity entity, int controlScheme, float inputSensitivity)
 {
     InputComponent inputComponent;
     inputComponent.controlScheme = controlScheme;
+    inputComponent.inputSensitivity = inputSensitivity;
     ecs->AddComponent(entity, inputComponent);
 }
 
