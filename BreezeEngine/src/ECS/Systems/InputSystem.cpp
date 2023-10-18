@@ -14,19 +14,19 @@ void InputSystem::Update(ECSManager& ecs)
 
             if (inputComponent.controlScheme[ACTION_LEFT] && keys[SDL_SCANCODE_A])
             {
-                transformComponent.position.X -= 1.0f;
+                transformComponent.position.X -= inputComponent.inputSensitivity;
             }
             if (inputComponent.controlScheme[ACTION_DOWN] && keys[SDL_SCANCODE_S])
             {
-                transformComponent.position.Y += 1.0f;
+                transformComponent.position.Y += inputComponent.inputSensitivity;
             }
             if (inputComponent.controlScheme[ACTION_UP] && keys[SDL_SCANCODE_W])
             {
-                transformComponent.position.Y -= 1.0f;
+                transformComponent.position.Y -= inputComponent.inputSensitivity;
             }
             if (inputComponent.controlScheme[ACTION_RIGHT] && keys[SDL_SCANCODE_D])
             {
-                transformComponent.position.X += 1.0f;
+                transformComponent.position.X += inputComponent.inputSensitivity;
             }
         }
     }

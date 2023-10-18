@@ -22,7 +22,7 @@ public:
     BREEZEENGINE_API Entity AddEntity();
     BREEZEENGINE_API void AddTranform(Entity entity, Vector2f pos, Vector2f vel, float rot, Vector2f scale);
     BREEZEENGINE_API void AddRenderer(Entity entity, const char* texturePath);
-    BREEZEENGINE_API void AddInput(Entity entity, int controlScheme);
+    BREEZEENGINE_API void AddInput(Entity entity, int controlScheme, float inputSensitivity);
 
 private:
     ECSManager* ecs;
