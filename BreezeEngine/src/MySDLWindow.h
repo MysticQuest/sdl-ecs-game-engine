@@ -4,7 +4,7 @@
 #include <SDL_image.h>
 #include "ECS/Systems/RenderSystem.h"
 
-struct MySDLWindow
+class MySDLWindow
 {
 public:
 	MySDLWindow(const char* title, int window_width, int window_height);

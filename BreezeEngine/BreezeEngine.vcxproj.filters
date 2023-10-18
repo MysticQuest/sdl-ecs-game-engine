@@ -68,6 +68,12 @@
     <ClInclude Include="src\ControlSchemes.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\ECS\Components\CollisionComponent.h">
+      <Filter>Source Files\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ECS\Systems\CollisionSystem.h">
+      <Filter>Source Files\ECS\Systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MyMath.cpp">
@@ -99,6 +105,9 @@
     </ClCompile>
     <ClCompile Include="src\ECS\Entity.cpp">
       <Filter>Source Files\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ECS\Systems\CollisionSystem.cpp">
+      <Filter>Source Files\ECS\Systems</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

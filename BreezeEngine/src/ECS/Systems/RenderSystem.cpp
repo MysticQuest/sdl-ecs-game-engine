@@ -9,8 +9,8 @@ void RenderSystem::Update(ECSManager& ecs)
     {
         if (ecs.renderComponents.contains(e) && ecs.transformComponents.contains(e))
         {
-            ecs.renderComponents[e].dstRect.x = ecs.transformComponents[e].position.X;
-            ecs.renderComponents[e].dstRect.y = ecs.transformComponents[e].position.Y;
+            ecs.renderComponents[e].dstRect.x = static_cast<int>(ecs.transformComponents[e].position.X);
+            ecs.renderComponents[e].dstRect.y = static_cast<int>(ecs.transformComponents[e].position.Y);
         }
     }
 }
