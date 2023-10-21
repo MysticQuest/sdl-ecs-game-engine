@@ -7,6 +7,7 @@ GameCore::GameCore(MySDLWindow& sdlWindow, int frame_rate)
     ecs = ECSManager();
     renderSystem = std::make_unique<RenderSystem>(sdlWindow.GetRenderer());
     m_frame_rate = frame_rate;
+    collisionSystem = std::make_unique<CollisionSystem>(sdlWindow.GetRenderer());
 }
 
 GameCore::~GameCore() { }
