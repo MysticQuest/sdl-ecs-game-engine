@@ -11,7 +11,12 @@ void ECSManager::AddComponent(Entity entity, T component)
         "Invalid component type."
         );
 
-    GetComponentMap<T>()[entity] = component;
+    auto& componentMap = GetComponentMap<T>();
+    auto it = componentMap.find(entity);
+    if (it == componentMap.end())
+    {
+        componentMap[entity] = component;
+    }
 }
 
 template<typename T>
@@ -25,7 +30,13 @@ void ECSManager::RemoveComponent(Entity entity)
         "Invalid component type."
         );
 
-    GetComponentMap<T>().erase(entity);
+    auto& componentMap = GetComponentMap<T>();
+    auto it = componentMap.find(entity);
+
+    if (it != componentMap.end())
+    {
+        componentMap.erase(it);
+    }
 }
 
 template<typename T>
@@ -40,6 +51,14 @@ T& ECSManager::GetComponent(Entity entity)
         );
 
     return GetComponentMap<T>()[entity];
+}
+
+void ECSManager::DestroyEntity(Entity entity)
+{
+    RemoveComponent<RenderComponent>(entity);
+    RemoveComponent<TransformComponent>(entity);
+    RemoveComponent<InputComponent>(entity);
+    RemoveComponent<CollisionComponent>(entity);
 }
 
 template<typename T>

@@ -34,6 +34,8 @@ void GameCore::Update(int deltaTime)
     renderSystem->Update(ecs);
     transformSystem->Update(ecs, deltaTime);
     inputSystem->Update(ecs);
+    collisionSystem->Update(ecs);
+    
 }
 
 void GameCore::Run(MySDLWindow& sdlWindow)
