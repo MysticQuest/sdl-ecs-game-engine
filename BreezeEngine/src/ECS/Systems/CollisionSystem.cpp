@@ -91,19 +91,16 @@ bool CollisionSystem::PixelCollision(SDL_Texture* texture1, SDL_Rect rect1, SDL_
 bool CollisionSystem::PixelIsSolid(SDL_Texture* texture, int x, int y)
 {
     Uint32 pixel;
-    Uint32* pixels = new Uint32[1];
+    Uint32 pixels[1]; // Local array
     SDL_Rect r = { x, y, 1, 1 };
 
-    SDL_RenderReadPixels(m_renderer, &r, SDL_PIXELFORMAT_RGBA8888, pixels, sizeof(Uint32)); // uses sizeof(Uint32) for the pitch parameter
+    SDL_RenderReadPixels(m_renderer, &r, SDL_PIXELFORMAT_RGBA8888, pixels, sizeof(Uint32));
     pixel = pixels[0];
-    delete[] pixels;
 
-    SDL_PixelFormat* format = SDL_AllocFormat(SDL_PIXELFORMAT_RGBA8888); // allocates an SDL_PixelFormat structure
-
+    SDL_PixelFormat* format = SDL_AllocFormat(SDL_PIXELFORMAT_RGBA8888);
     Uint8 red, green, blue, alpha;
     SDL_GetRGBA(pixel, format, &red, &green, &blue, &alpha);
+    SDL_FreeFormat(format);
 
-    SDL_FreeFormat(format); // frees the allocated SDL_PixelFormat
-
-    return alpha > 230;
+    return alpha > 170;
 }
