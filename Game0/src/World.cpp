@@ -17,14 +17,14 @@ void World::Init()
 	OutputDebugString(message.c_str());
 	breezeAPI.AddRenderer(entity, "res/textures/pac1.png");
 	breezeAPI.AddTranform(entity, Vector2f(300, 500), Vector2f(0, 0), 90, Vector2f(1, 1));
-	breezeAPI.AddInput(entity, CONTROL_SCHEME_XY, .3f);
+	breezeAPI.AddInput(entity, CONTROL_SCHEME_XY, .1f);
 	breezeAPI.AddCollision(entity);
 
 	Entity entity1 = breezeAPI.AddEntity(); 
 	std::wstring message1 = L"Added Entity with id: " + std::to_wstring(entity1) + L'\n'; 
 	OutputDebugString(message1.c_str()); 
 	breezeAPI.AddRenderer(entity1, "res/textures/pac1.png");
-	breezeAPI.AddTranform(entity1, Vector2f(300, 100), Vector2f(.1f, .1f), 90, Vector2f(1, 1));
+	breezeAPI.AddTranform(entity1, Vector2f(300, 100), Vector2f(.1f, .1f), 90, Vector2f(2, 2));
 	breezeAPI.AddCollision(entity1);
 
 	Entity entity2 = breezeAPI.AddEntity();

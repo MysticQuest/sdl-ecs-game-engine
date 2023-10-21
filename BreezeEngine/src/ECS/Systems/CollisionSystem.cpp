@@ -102,5 +102,5 @@ bool CollisionSystem::PixelIsSolid(SDL_Texture* texture, int x, int y)
     SDL_GetRGBA(pixel, format, &red, &green, &blue, &alpha);
     SDL_FreeFormat(format);
 
-    return alpha > 170;
+    return alpha > 200;
 }

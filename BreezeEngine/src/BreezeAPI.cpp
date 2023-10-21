@@ -45,9 +45,11 @@ void BreezeAPI::AddTranform(Entity entity, Vector2f pos, Vector2f vel, float rot
 void BreezeAPI::AddRenderer(Entity entity, const char* texturePath)
 {
     SDL_Texture* texture = sdl->LoadTexture(texturePath);
+    int textureWidth, textureHeight;
+    SDL_QueryTexture(texture, NULL, NULL, &textureWidth, &textureHeight);
     ecs->AddComponent(entity, RenderComponent{
-        SDL_Rect{ 0, 0, 64, 64 },
-        SDL_Rect{ 100, 100, 64, 64 },
+        SDL_Rect{ 0, 0, textureWidth, textureHeight },
+        SDL_Rect{ 0, 0, textureWidth, textureHeight },
         texture,
         });
 }
