@@ -150,6 +150,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="EventManager.h" />
     <ClInclude Include="src\BreezeAPI.h" />
     <ClInclude Include="src\ControlSchemes.h" />
     <ClInclude Include="src\ECS\Components\CollisionComponent.h" />
@@ -170,6 +171,7 @@
     <ClInclude Include="src\Utils.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="src\BreezeAPI.cpp" />
     <ClCompile Include="src\ECS\ECSManager.cpp" />
     <ClCompile Include="src\ECS\Entity.cpp" />

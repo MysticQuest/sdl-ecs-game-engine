@@ -74,6 +74,9 @@
     <ClInclude Include="src\ECS\Systems\CollisionSystem.h">
       <Filter>Source Files\ECS\Systems</Filter>
     </ClInclude>
+    <ClInclude Include="EventManager.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\MyMath.cpp">
@@ -108,6 +111,9 @@
     </ClCompile>
     <ClCompile Include="src\ECS\Systems\CollisionSystem.cpp">
       <Filter>Source Files\ECS\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="EventManager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
