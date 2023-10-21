@@ -3,12 +3,12 @@
 #include <vector>
 #include <functional>
 
-enum class EventType {
-};
+enum class EventType 
+{};
 
-using Callback = std::function<void(int)>;  // entity ID as parameter
-
-class EventManager {
+using Callback = std::function<void(int)>;
+class EventManager 
+{
 public:
     static void Subscribe(EventType eventType, Callback callback);
     static void Emit(EventType eventType, int entityId);
