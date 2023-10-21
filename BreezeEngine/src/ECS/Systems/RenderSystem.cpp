@@ -1,12 +1,8 @@
 #include <SDL.h>
 #include "RenderSystem.h"
-//#include "../../EventManager.h"
+#include "../../EventManager.h"
 
-RenderSystem::RenderSystem(SDL_Renderer* renderer)
-    : m_renderer(renderer) {}
-//    EventManager::Subscribe(EventType::AngleChanged, std::bind(&RenderSystem::OnAngleChanged, this, std::placeholders::_1));
-//    EventManager::Subscribe(EventType::ScaleChanged, std::bind(&RenderSystem::OnScaleChanged, this, std::placeholders::_1));
-//}
+RenderSystem::RenderSystem(SDL_Renderer* renderer) : m_renderer(renderer) {}
 
 void RenderSystem::Update(ECSManager& ecs)
 {
@@ -47,4 +43,5 @@ void RenderSystem::Render(ECSManager& ecs, SDL_Renderer* renderer)
         }
     }
 }
+
 
