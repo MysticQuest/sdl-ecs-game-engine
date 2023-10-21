@@ -5,6 +5,7 @@
 #include "ECS/Systems/RenderSystem.h"
 #include "ECS/Systems/TransformSystem.h"
 #include "ECS/Systems/InputSystem.h"
+#include "ECS/Systems/CollisionSystem.h"
 #include "MyMath.h"
 #include "Utils.h"
 
@@ -31,4 +32,5 @@ private:
 	std::unique_ptr<RenderSystem> renderSystem;
 	std::unique_ptr<TransformSystem> transformSystem;
 	std::unique_ptr<InputSystem> inputSystem;
+	std::unique_ptr<CollisionSystem> collisionSystem;
 };
