@@ -5,13 +5,10 @@ void TransformSystem::Update(ECSManager& ecs, int deltaTime)
 {
     Vector2 windowSize = utils::GetWindowSize();
 
-    for (int e = 1; e <= max_entity; e++)
+    for (auto& [e, collisionComp] : ecs.collisionComponents)
     {
-        if (ecs.transformComponents.contains(e))
-        {
-            ecs.transformComponents[e].position.X += ecs.transformComponents[e].velocity.X * deltaTime;
-            ecs.transformComponents[e].position.Y += ecs.transformComponents[e].velocity.Y * deltaTime;
-        }
+        ecs.transformComponents[e].position.X += ecs.transformComponents[e].velocity.X * deltaTime;
+        ecs.transformComponents[e].position.Y += ecs.transformComponents[e].velocity.Y * deltaTime;
 
         if (ecs.transformComponents[e].position.X > static_cast<float>(windowSize.X) - 100)
         {
