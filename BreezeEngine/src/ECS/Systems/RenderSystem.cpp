@@ -40,8 +40,35 @@ void RenderSystem::Render(ECSManager& ecs, SDL_Renderer* renderer)
                 &center,
                 flip
             );
+
+            // AABB Debug
+            if (ecs.collisionComponents.contains(e))
+            {
+                DrawAABB(renderer, ecs.collisionComponents[e].aabb);
+            }
         }
     }
 }
+
+void RenderSystem::DrawAABB(SDL_Renderer* renderer, const AABB& aabb)
+{
+    // Store the current draw color
+    Uint8 r, g, b, a;
+    SDL_GetRenderDrawColor(renderer, &r, &g, &b, &a);
+
+    // Set draw color to red
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    SDL_Rect rect = {
+        static_cast<int>(aabb.x),
+        static_cast<int>(aabb.y),
+        static_cast<int>(aabb.width),
+        static_cast<int>(aabb.height)
+    };
+    SDL_RenderDrawRect(renderer, &rect);
+
+    // Reset to the original draw color
+    SDL_SetRenderDrawColor(renderer, r, g, b, a);
+}
+
 
 

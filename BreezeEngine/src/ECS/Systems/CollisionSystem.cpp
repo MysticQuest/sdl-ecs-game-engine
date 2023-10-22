@@ -91,7 +91,7 @@ bool CollisionSystem::PixelCollision(SDL_Texture* texture1, SDL_Rect rect1, SDL_
 bool CollisionSystem::PixelIsSolid(SDL_Texture* texture, int x, int y)
 {
     Uint32 pixel;
-    Uint32 pixels[1]; // Local array
+    Uint32 pixels[1];
     SDL_Rect r = { x, y, 1, 1 };
 
     SDL_RenderReadPixels(m_renderer, &r, SDL_PIXELFORMAT_RGBA8888, pixels, sizeof(Uint32));

@@ -12,6 +12,8 @@ public:
     void Update(ECSManager& ecsManager);
     void Render(ECSManager& ecsManager, SDL_Renderer* renderer);
 
+    void DrawAABB(SDL_Renderer* renderer, const AABB& aabb);
+
 private:
     SDL_Renderer* m_renderer;
 };
