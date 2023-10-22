@@ -7,9 +7,9 @@ void CollisionSystem::Update(ECSManager& ecs)
     std::set<int> entitiesToDestroy;
 
     // Syncs entity render and aabb
-    for (int e = 1; e <= max_entity; e++)
+    for (auto& [e, collisionComp] : ecs.collisionComponents)
     {
-        if (ecs.collisionComponents.contains(e) && ecs.renderComponents.contains(e))
+        if (ecs.renderComponents.contains(e))
         {
             const SDL_Rect& dstRect = ecs.renderComponents[e].dstRect;
             ecs.collisionComponents[e].aabb = {
@@ -21,12 +21,13 @@ void CollisionSystem::Update(ECSManager& ecs)
         }
     }
 
-    for (int e1 = 1; e1 <= max_entity; e1++)
+    for (auto& [e1, collisionComp] : ecs.collisionComponents)
     {
-        if (ecs.collisionComponents.contains(e1) && ecs.renderComponents.contains(e1))
+        if (ecs.renderComponents.contains(e1))
         {
             const AABB& box1 = ecs.collisionComponents[e1].aabb;
 
+            // TODO: optimize this
             for (int e2 = e1 + 1; e2 <= max_entity; e2++)
             {
                 if (ecs.collisionComponents.contains(e2) && ecs.renderComponents.contains(e2))
