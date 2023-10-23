@@ -1,9 +1,11 @@
 # Breeze engine (WIP)
 A simple ECS game engine using SDL.
 
-This repo contains a VS solution made of two (as of yet) distinct projects.
-- An engine (.dll project) dependency.
-- A sample game (windows application).
+This repo contains a VS solution made of two projects.
+- A game engine (library build dependency for the game).
+- A game (windows application).
+
+When the engine project is built, its DLL, any SDL runtime dependencies, a res folder containing the textures,  and an engine.ini file containing settings, get copied to the game's binaries path.
 
 ### Entity Component System
 - Entities work as plain identifiers and are mapped to components.
@@ -14,4 +16,9 @@ This repo contains a VS solution made of two (as of yet) distinct projects.
 - Rendering
 - Input
 - Transform
-- Collision (WIP)
+- Collision
+
+### Notes
+- The engine loop handles low level runtime functions (frames, rendering, system update, event polling etc).
+- The engine loop is agnostically observed by the game's update, intended for game-specific logic.
+- At the moment, the game reads the engine.ini and loads the textures inside the res folder.
