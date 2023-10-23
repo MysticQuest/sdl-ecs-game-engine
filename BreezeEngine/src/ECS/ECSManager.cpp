@@ -61,6 +61,11 @@ void ECSManager::DestroyEntity(Entity entity)
     RemoveComponent<CollisionComponent>(entity);
 }
 
+bool ECSManager::HasInputComponents() const
+{
+    return !inputComponents.empty();
+}
+
 template<typename T>
 std::unordered_map<Entity, T>& ECSManager::GetComponentMap()
 {
