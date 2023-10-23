@@ -20,38 +20,70 @@ void CollisionSystem::Update(ECSManager& ecs)
         }
     }
 
-    checkedEntities.clear();
-    entitiesToDestroy.clear();
+    if (ecs.inputComponents.empty()) 
+    {
+        return;
+    }
 
-    for (auto& [e1, collisionComp1] : ecs.collisionComponents) {
-        if (ecs.renderComponents.contains(e1)) {
-            const AABB& box1 = collisionComp1.aabb;
+    const int playerEntity = ecs.inputComponents.begin()->first;
+    const AABB& box1 = ecs.collisionComponents[playerEntity].aabb;
 
-            for (const auto& [e2, collisionComp2] : ecs.collisionComponents) {
-                if (e2 <= e1 || checkedEntities.find(e2) != checkedEntities.end()) {
-                    continue;
-                }
+    for (const auto& [e2, collisionComp2] : ecs.collisionComponents) 
+    {
+        if (e2 == playerEntity) 
+        {
+            continue;
+        }
 
-                if (ecs.renderComponents.contains(e2)) {
-                    const AABB& box2 = collisionComp2.aabb;
+        if (ecs.collisionComponents.contains(e2)) 
+        {
+            const AABB& box2 = collisionComp2.aabb;
 
-                    if (AABBcollision(box1, box2)) {
-                        entitiesToDestroy.insert(e1);
-                        entitiesToDestroy.insert(e2);
-                    }
-                }
+            if (AABBcollision(box1, box2)) 
+            {
+                entitiesToDestroy.insert(playerEntity);
+                entitiesToDestroy.insert(e2);
             }
-            checkedEntities.insert(e1);
         }
     }
+
+    // Checks all entities for collisions instead of just the player
+        
+    //checkedEntities.clear();
+    //entitiesToDestroy.clear();
+
+    //for (auto& [e1, collisionComp1] : ecs.collisionComponents) {
+    //    if (ecs.renderComponents.contains(e1)) {
+    //        const AABB& box1 = collisionComp1.aabb;
+
+    //        for (const auto& [e2, collisionComp2] : ecs.collisionComponents) {
+    //            if (e2 <= e1 || checkedEntities.find(e2) != checkedEntities.end()) {
+    //                continue;
+    //            }
+
+    //            if (ecs.renderComponents.contains(e2)) {
+    //                const AABB& box2 = collisionComp2.aabb;
+
+    //                if (AABBcollision(box1, box2)) {
+    //                    entitiesToDestroy.insert(e1);
+    //                    entitiesToDestroy.insert(e2);
+    //                }
+    //            }
+    //        }
+    //        checkedEntities.insert(e1);
+    //    }
+    //}
+
 
     for (int entityId : entitiesToDestroy)
     {
         ecs.DestroyEntity(entityId);
     }
 
-    checkedEntities.clear();
-    entitiesToDestroy.clear();
+    //checkedEntities.clear();
+    //entitiesToDestroy.clear();
+
+
 
     // Unused pixel collision code
 
