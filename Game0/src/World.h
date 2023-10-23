@@ -13,5 +13,6 @@ public:
 private:
 	void Init();
 	void AddPlayer();
-	void Update();
+	void Update(int deltaTime);
+	int elapsedTime = 0;
 };

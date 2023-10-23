@@ -28,14 +28,21 @@ void GameCore::PollEvents()
         isRunning = false;
     }
 
-    if (gameOver && event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_r) {
+    if (gameOver && event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_r) 
+    {
         RestartGame();
         SDL_DestroyTexture(gameOverTexture);
     }
 
-    if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_q) {
+    if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_q) 
+    {
         GameOver();
     }
+}
+
+void GameCore::RegisterObserver(const std::function<void(int)>& callback) 
+{
+    observer = callback;
 }
 
 void GameCore::GameOver() {
@@ -44,7 +51,8 @@ void GameCore::GameOver() {
     gameOverTexture = IMG_LoadTexture(m_sdlWindow.GetRenderer(), "res/textures/gameover.png");
 }
 
-void GameCore::RestartGame() {
+void GameCore::RestartGame() 
+{
     InitializeGame();
 }
 
@@ -77,6 +85,10 @@ void GameCore::Update(int deltaTime)
         transformSystem->Update(ecs, deltaTime);
         inputSystem->Update(ecs);
         collisionSystem->Update(ecs);
+
+        if (observer) {
+            observer(deltaTime);
+        }
     }
 }
 

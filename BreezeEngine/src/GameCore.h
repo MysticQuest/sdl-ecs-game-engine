@@ -8,6 +8,7 @@
 #include "ECS/Systems/CollisionSystem.h"
 #include "MyMath.h"
 #include "Utils.h"
+#include <functional>
 
 
 class GameCore
@@ -23,6 +24,7 @@ public:
 	void Run(MySDLWindow& sdlWindow);
 	void GameOver();
 	void RestartGame();
+	void RegisterObserver(const std::function<void(int)>& callback);
 	ECSManager ecs;
 
 private:
@@ -33,6 +35,8 @@ private:
 	const Uint8* keystates = SDL_GetKeyboardState(NULL);
 	bool gameOver = false;
 	SDL_Texture* gameOverTexture = nullptr;
+
+	std::function<void(int)> observer;
 
 
 	std::unique_ptr<RenderSystem> renderSystem;
