@@ -5,27 +5,39 @@ void TransformSystem::Update(ECSManager& ecs, int deltaTime)
 {
     Vector2 windowSize = utils::GetWindowSize();
 
-    for (auto& [e, collisionComp] : ecs.collisionComponents)
+    for (auto& [e, transform] : ecs.transformComponents)
     {
-        ecs.transformComponents[e].position.X += ecs.transformComponents[e].velocity.X * deltaTime;
-        ecs.transformComponents[e].position.Y += ecs.transformComponents[e].velocity.Y * deltaTime;
+        transform.position.X += transform.velocity.X * deltaTime;
+        transform.position.Y += transform.velocity.Y * deltaTime;
 
-        if (ecs.transformComponents[e].position.X > static_cast<float>(windowSize.X) - 100)
+        // if the entity also has a collision component, constrain it
+        auto collisionIt = ecs.collisionComponents.find(e);
+        if (collisionIt != ecs.collisionComponents.end())
         {
-            ecs.transformComponents[e].position.X = static_cast<float>(windowSize.X) - 100;
-        }
-        else if (ecs.transformComponents[e].position.X < 0)
-        {
-            ecs.transformComponents[e].position.X = 0;
-        }
+            auto& collisionComp = collisionIt->second;
 
-        if (ecs.transformComponents[e].position.Y > static_cast<float>(windowSize.Y) - 100)
-        {
-            ecs.transformComponents[e].position.Y = static_cast<float>(windowSize.Y) - 100;
-        }
-        else if (ecs.transformComponents[e].position.Y < 30)
-        {
-            ecs.transformComponents[e].position.Y = 30;
+            float entityWidth = collisionComp.aabb.width;
+            float entityHeight = collisionComp.aabb.height;
+
+            // constraint X
+            if (transform.position.X > static_cast<float>(windowSize.X) - entityWidth)
+            {
+                transform.position.X = static_cast<float>(windowSize.X) - entityWidth;
+            }
+            else if (transform.position.X < 0)
+            {
+                transform.position.X = 0;
+            }
+
+            // constraint Y
+            if (transform.position.Y > static_cast<float>(windowSize.Y) - entityHeight)
+            {
+                transform.position.Y = static_cast<float>(windowSize.Y) - entityHeight;
+            }
+            else if (transform.position.Y < 0)
+            {
+                transform.position.Y = 0;
+            }
         }
     }
 }

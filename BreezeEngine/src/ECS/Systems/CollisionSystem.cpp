@@ -53,6 +53,8 @@ void CollisionSystem::Update(ECSManager& ecs)
     checkedEntities.clear();
     entitiesToDestroy.clear();
 
+    // Unused pixel collision code
+
     //for (auto& [e1, collisionComp] : ecs.collisionComponents)
     //{
     //    if (ecs.renderComponents.contains(e1))
