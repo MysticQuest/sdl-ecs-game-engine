@@ -62,8 +62,8 @@ void BreezeAPI::AddInput(Entity entity, int controlScheme, float inputSensitivit
     ecs->AddComponent(entity, inputComponent);
 }
 
-void BreezeAPI::AddCollision(Entity entity)
+void BreezeAPI::AddCollision(Entity entity, bool isConstrained)
 {
-    ecs->AddComponent(entity, CollisionComponent{});
+    ecs->AddComponent(entity, CollisionComponent{ .isConstrained = isConstrained });
 }
 

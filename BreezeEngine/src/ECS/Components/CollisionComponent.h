@@ -4,4 +4,5 @@
 struct CollisionComponent
 {
     AABB aabb;
+    bool isConstrained = true;
 };

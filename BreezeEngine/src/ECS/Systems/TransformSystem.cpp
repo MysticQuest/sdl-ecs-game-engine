@@ -16,6 +16,11 @@ void TransformSystem::Update(ECSManager& ecs, int deltaTime)
         {
             auto& collisionComp = collisionIt->second;
 
+            if (collisionComp.isConstrained == false) 
+            { 
+                continue; 
+            }
+
             float entityWidth = collisionComp.aabb.width;
             float entityHeight = collisionComp.aabb.height;
 
