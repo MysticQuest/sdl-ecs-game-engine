@@ -5,6 +5,7 @@
 World::World() : breezeAPI("engine.ini", "Sample Game 1")
 {
 	Init();
+	breezeAPI.RegisterGameUpdates(std::bind(&World::Update, this, std::placeholders::_1));
 	breezeAPI.Run();
 }
 
@@ -40,7 +41,13 @@ void World::AddPlayer()
 	breezeAPI.AddCollision(entity, true);
 }
 
-void World::Update()
+void World::Update(int deltaTime)
 {
+	elapsedTime += deltaTime;
 
+	if (elapsedTime >= 3000)
+	{
+		breezeAPI.GameOver();
+		elapsedTime = 0;
+	}
 }

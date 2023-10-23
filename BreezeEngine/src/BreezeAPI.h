@@ -1,5 +1,6 @@
 #include <memory>
 #include <iostream>
+#include <functional>
 #include "MyMath.h"
 #include "ECS/Entity.h"
 #include "ControlSchemes.h"
@@ -27,7 +28,12 @@ public:
     BREEZEENGINE_API void AddInput(Entity entity, int controlScheme, float inputSensitivity);
     BREEZEENGINE_API void AddCollision(Entity entity, bool isConstrained);
 
+    BREEZEENGINE_API void RegisterGameUpdates(const std::function<void(int)>& update);
+    void OnGameCoreUpdate(int deltaTime);
+
 private:
+    std::vector<std::function<void(int)>> gameUpdates;
+
     ECSManager* ecs;
     std::unique_ptr<SettingsResolver> settings;
     std::unique_ptr<MySDLWindow> sdl;

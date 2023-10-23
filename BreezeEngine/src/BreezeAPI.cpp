@@ -11,18 +11,29 @@ BreezeAPI::BreezeAPI(const std::string& settingsFile, const char* title)
     sdl = std::make_unique<MySDLWindow>(title, config.width, config.height);
     game = std::make_unique<GameCore>(*sdl, config.frame_rate);
     ecs = &(game->ecs);
+    game->RegisterObserver(std::bind(&BreezeAPI::OnGameCoreUpdate, this, std::placeholders::_1));
 }
 
 BreezeAPI::~BreezeAPI() = default;
 
 void BreezeAPI::Init()
 {
-   
+    
 }
 
 void BreezeAPI::Run()
 {
     game->Run(*sdl);
+}
+
+void BreezeAPI::RegisterGameUpdates(const std::function<void(int)>& update) {
+    gameUpdates.push_back(update);
+}
+
+void BreezeAPI::OnGameCoreUpdate(int deltaTime) {
+    for (auto& update : gameUpdates) {
+        update(deltaTime);
+    }
 }
 
 void BreezeAPI::GameOver()
