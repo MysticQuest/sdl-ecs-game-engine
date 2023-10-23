@@ -5,6 +5,7 @@
 #include "ECS/Entity.h"
 #include "ControlSchemes.h"
 #include "Export.h"
+#include "Utils.h"
 
 class SettingsResolver;
 class MySDLWindow;
@@ -27,6 +28,9 @@ public:
     BREEZEENGINE_API void AddRenderer(Entity entity, const char* texturePath);
     BREEZEENGINE_API void AddInput(Entity entity, int controlScheme, float inputSensitivity);
     BREEZEENGINE_API void AddCollision(Entity entity, bool isConstrained);
+
+    BREEZEENGINE_API float Rng(float min, float max);
+    BREEZEENGINE_API Vector2 GetWindowSize();
 
     BREEZEENGINE_API void RegisterGameUpdates(const std::function<void(int)>& update);
     void OnGameCoreUpdate(int deltaTime);

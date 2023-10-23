@@ -1,5 +1,4 @@
 #include "MyMath.h"
-#include <random>
 
 std::mt19937& RNG::getGenerator()
 {

@@ -12,7 +12,14 @@ public:
 
 private:
 	void Init();
-	void AddPlayer();
 	void Update(int deltaTime);
+
+	void AddPlayer();
+	void AddEnemies(int count);
+	void Fire(Entity entity);
+	float Rng(float min, float max);
+	Vector2 windowSize;
+
 	int elapsedTime = 0;
+	std::vector<Entity> entities;
 };
