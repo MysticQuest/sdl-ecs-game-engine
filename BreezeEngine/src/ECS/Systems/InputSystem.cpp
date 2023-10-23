@@ -7,10 +7,12 @@ void InputSystem::Update(ECSManager& ecs)
 
     for (auto& [e, inputComp] : ecs.inputComponents)
     {
-        if (ecs.transformComponents.contains(e))
+        auto itTransform = ecs.transformComponents.find(e);
+
+        if (itTransform != ecs.transformComponents.end())
         {
-            auto& inputComponent = ecs.inputComponents[e];
-            auto& transformComponent = ecs.transformComponents[e];
+            auto& inputComponent = inputComp;  // You already have this from the loop
+            auto& transformComponent = itTransform->second;
 
             if (inputComponent.controlScheme[ACTION_LEFT] && keys[SDL_SCANCODE_A])
             {
