@@ -17,14 +17,7 @@ void World::Init()
 	OutputDebugString(L"Initializing World...\n");
 
 	AddPlayer();
-	AddEnemies(3);
-
-	//Entity entity2 = breezeAPI.AddEntity();
-	//std::wstring message2 = L"Added Entity with id: " + std::to_wstring(entity2) + L'\n';
-	//OutputDebugString(message2.c_str());
-	//breezeAPI.AddRenderer(entity2, "pac1.png");
-	//breezeAPI.AddTranform(entity2, Vector2f(300, 300), Vector2f(0, 0), 0, Vector2f(1, 1));
-	//breezeAPI.AddCollision(entity2, true);
+	AddEnemies(50);
 }
 
 void World::AddPlayer()
@@ -47,7 +40,7 @@ void World::AddEnemies(int count)
 		std::wstring message = L"Added Entity with id: " + std::to_wstring(lastEntity) + L'\n';
 		OutputDebugString(message.c_str());
 		breezeAPI.AddRenderer(lastEntity, "pac1.png");
-		breezeAPI.AddTranform(lastEntity, Vector2f(Rng(0, windowSize.X), Rng(0, 100)), Vector2f(Rng(1, 5), Rng(1, 5)), 0, Vector2f(1, 1));
+		breezeAPI.AddTranform(lastEntity, Vector2f(Rng(0, windowSize.X), Rng(0, 600)), Vector2f(Rng(-5, 5), Rng(-2, 2)), 0, Vector2f(1, 1));
 		breezeAPI.AddCollision(lastEntity, true);
 	}
 }
@@ -63,7 +56,7 @@ void World::Update(int deltaTime)
 
 	if (elapsedTime >= 5000)
 	{
-		AddEnemies(2);
+		AddEnemies(50);
 		elapsedTime = 0;
 	}
 }
