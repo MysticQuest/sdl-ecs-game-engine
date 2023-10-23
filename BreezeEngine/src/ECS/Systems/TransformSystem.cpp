@@ -37,15 +37,18 @@ void TransformSystem::Update(ECSManager& ecs, int deltaTime)
             }
 
             // constraint Y
-            if (transform.position.Y > static_cast<float>(windowSize.Y) - entityHeight)
-            {
-                transform.velocity = Vector2f(transform.velocity.X, -transform.velocity.Y);
-                transform.position.Y = static_cast<float>(windowSize.Y) - entityHeight;
-            }
-            else if (transform.position.Y < 0)
+            if (transform.position.Y < 0)
             {
                 transform.velocity = Vector2f(transform.velocity.X, -transform.velocity.Y);
                 transform.position.Y = 0;
+            }
+            if (transform.position.Y > windowSize.Y * 0.3f)
+            {
+                transform.velocity = Vector2f(transform.velocity.X, -transform.velocity.Y);
+            }
+            if (transform.position.Y > static_cast<float>(windowSize.Y) - entityHeight)
+            {
+                transform.position.Y = static_cast<float>(windowSize.Y) - entityHeight;
             }
         }
     }
