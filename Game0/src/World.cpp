@@ -59,6 +59,11 @@ void World::Update(int deltaTime)
 		AddEnemies(50);
 		elapsedTime = 0;
 	}
+
+	if (!breezeAPI.InputExists())
+	{
+		breezeAPI.GameOver();
+	}
 }
 
 float World::Rng(float min, float max)

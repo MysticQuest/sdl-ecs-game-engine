@@ -90,6 +90,11 @@ void BreezeAPI::AddCollision(Entity entity, bool isConstrained)
     ecs->AddComponent(entity, CollisionComponent{ .isConstrained = isConstrained });
 }
 
+bool BreezeAPI::InputExists()
+{
+    return ecs->HasInputComponents();
+}
+
 float BreezeAPI::Rng(float min, float max)
 {
     return RNG::Int(min, max);
