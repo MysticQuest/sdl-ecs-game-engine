@@ -71,9 +71,24 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(ProjectDir)</OutDir>
+    <OutDir>$(SolutionDir)\BreezeEngine\$(Platform)\$(Configuration)\</OutDir>
     <IncludePath>$(ProjectDir)src;$(ProjectDir)include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
     <LibraryPath>$(ProjectDir)lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LibraryPath>$(ProjectDir)lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <IncludePath>$(ProjectDir)src;$(ProjectDir)include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <OutDir>$(SolutionDir)\BreezeEngine\$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LibraryPath>$(ProjectDir)lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <IncludePath>$(ProjectDir)src;$(ProjectDir)include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <OutDir>$(SolutionDir)\BreezeEngine\$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LibraryPath>$(ProjectDir)lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <IncludePath>$(ProjectDir)src;$(ProjectDir)include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <OutDir>$(SolutionDir)\BreezeEngine\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -83,12 +98,27 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy /s /y "$(SolutionDir)BreezeEngine\engine.ini" "$(SolutionDir)Game0\$(Platform)\$(Configuration)\"
+xcopy /s /y "$(SolutionDir)BreezeEngine\res\*.*" "$(SolutionDir)Game0\$(Platform)\$(Configuration)\res\"
+xcopy /s /y "$(SolutionDir)BreezeEngine\SDL2.dll" "$(SolutionDir)Game0\$(Platform)\$(Configuration)\"
+xcopy /s /y "$(SolutionDir)BreezeEngine\SDL2_image.dll" "$(SolutionDir)Game0\$(Platform)\$(Configuration)\"</Command>
+      <Message>Copies SDL and config/resource dependencies</Message>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy /s /y "$(SolutionDir)\BreezeEngine\$(Platform)\$(Configuration)\BreezeEngine.dll" "$(SolutionDir)Game0\$(Platform)\$(Configuration)\"</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Copies engine dll to game folder</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -100,6 +130,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -107,7 +138,19 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /s /y "$(SolutionDir)\BreezeEngine\$(Platform)\$(Configuration)\BreezeEngine.dll" "$(SolutionDir)Game0\$(Platform)\$(Configuration)\"</Command>
+      <Message>Copies engine dll to game folder</Message>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy /s /y "$(SolutionDir)BreezeEngine\engine.ini" "$(SolutionDir)Game0\$(Platform)\$(Configuration)\"
+xcopy /s /y "$(SolutionDir)BreezeEngine\res\*.*" "$(SolutionDir)Game0\$(Platform)\$(Configuration)\res\"
+xcopy /s /y "$(SolutionDir)BreezeEngine\SDL2.dll" "$(SolutionDir)Game0\$(Platform)\$(Configuration)\"
+xcopy /s /y "$(SolutionDir)BreezeEngine\SDL2_image.dll" "$(SolutionDir)Game0\$(Platform)\$(Configuration)\"</Command>
+      <Message>Copies SDL and config/resource dependencies</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -126,9 +169,16 @@
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y /d  "$(ProjectDir)\*.dll" "..\Game0\$(Platform)\$(Configuration)\"</Command>
-      <Message>Copy engine dll to game output dir</Message>
+      <Command>xcopy /s /y "$(SolutionDir)\BreezeEngine\$(Platform)\$(Configuration)\BreezeEngine.dll" "$(SolutionDir)Game0\$(Platform)\$(Configuration)\"</Command>
+      <Message>Copies engine dll to game folder</Message>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy /s /y "$(SolutionDir)BreezeEngine\engine.ini" "$(SolutionDir)Game0\$(Platform)\$(Configuration)\"
+xcopy /s /y "$(SolutionDir)BreezeEngine\res\*.*" "$(SolutionDir)Game0\$(Platform)\$(Configuration)\res\"
+xcopy /s /y "$(SolutionDir)BreezeEngine\SDL2.dll" "$(SolutionDir)Game0\$(Platform)\$(Configuration)\"
+xcopy /s /y "$(SolutionDir)BreezeEngine\SDL2_image.dll" "$(SolutionDir)Game0\$(Platform)\$(Configuration)\"</Command>
+      <Message>Copies SDL and config/resource dependencies</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -138,8 +188,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;BREEZEENGINE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -147,7 +198,19 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /s /y "$(SolutionDir)\BreezeEngine\$(Platform)\$(Configuration)\BreezeEngine.dll" "$(SolutionDir)Game0\$(Platform)\$(Configuration)\"</Command>
+      <Message>Copies engine dll to game folder</Message>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy /s /y "$(SolutionDir)BreezeEngine\engine.ini" "$(SolutionDir)Game0\$(Platform)\$(Configuration)\"
+xcopy /s /y "$(SolutionDir)BreezeEngine\res\*.*" "$(SolutionDir)Game0\$(Platform)\$(Configuration)\res\"
+xcopy /s /y "$(SolutionDir)BreezeEngine\SDL2.dll" "$(SolutionDir)Game0\$(Platform)\$(Configuration)\"
+xcopy /s /y "$(SolutionDir)BreezeEngine\SDL2_image.dll" "$(SolutionDir)Game0\$(Platform)\$(Configuration)\"</Command>
+      <Message>Copies SDL and config/resource dependencies</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\BreezeAPI.h" />
