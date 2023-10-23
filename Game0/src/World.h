@@ -8,10 +8,10 @@ class World
 {
 public:
 	World();
-
 	BreezeAPI breezeAPI;
 
 private:
 	void Init();
+	void AddPlayer();
 	void Update();
 };
