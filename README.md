@@ -12,10 +12,13 @@ When the engine project is built, its DLL, any SDL runtime dependencies, a res f
 - Components are simple data structs, devoid of behaviour.
 - Systems manage the components' behaviour and logic.
 
-The engine handles the low level parts of the gameloop (frames, rendering, system update, polling etc), and is also agnostically observed by the game's update, intended for game-specific logic. 
-
 ### Supported Components
 - Rendering
 - Input
 - Transform
 - Collision
+
+### Notes
+- The engine loop handles low level runtime functions (frames, rendering, system update, event polling etc).
+- The engine loop is agnostically observed by the game's update, intended for game-specific logic.
+- At the moment, the game reads the engine.ini and loads the textures inside the res folder.
