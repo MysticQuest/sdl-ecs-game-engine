@@ -18,7 +18,9 @@ public:
 
     BREEZEENGINE_API void Init();
     BREEZEENGINE_API void Run();
-    
+    BREEZEENGINE_API void GameOver();
+    BREEZEENGINE_API void RestartGame();
+
     BREEZEENGINE_API Entity AddEntity();
     BREEZEENGINE_API void AddTranform(Entity entity, Vector2f pos, Vector2f vel, float rot, Vector2f scale);
     BREEZEENGINE_API void AddRenderer(Entity entity, const char* texturePath);

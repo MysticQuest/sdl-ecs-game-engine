@@ -25,6 +25,17 @@ void BreezeAPI::Run()
     game->Run(*sdl);
 }
 
+void BreezeAPI::GameOver()
+{
+    game->GameOver();
+}
+
+void BreezeAPI::RestartGame()
+{
+    game->RestartGame();
+}
+
+
 Entity BreezeAPI::AddEntity()
 {
     Entity entity = create_entity();
