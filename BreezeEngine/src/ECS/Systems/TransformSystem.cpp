@@ -7,8 +7,8 @@ void TransformSystem::Update(ECSManager& ecs, int deltaTime)
 
     for (auto& [e, transform] : ecs.transformComponents)
     {
-        transform.position.X += transform.velocity.X * deltaTime;
-        transform.position.Y += transform.velocity.Y * deltaTime;
+        transform.position.X += transform.velocity.X * deltaTime * 0.01f;
+        transform.position.Y += transform.velocity.Y * deltaTime * 0.01f;
 
         // if the entity also has a collision component, constrain it
         auto collisionIt = ecs.collisionComponents.find(e);
