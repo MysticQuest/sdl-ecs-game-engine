@@ -1,6 +1,7 @@
 #include <memory>
 #include <random>
 #include "GameCore.h"
+#include "Utils.h"
 
 GameCore::GameCore(MySDLWindow& sdlWindow, int frame_rate)
     : m_sdlWindow(sdlWindow), m_frame_rate(frame_rate), isRunning(true)
@@ -62,12 +63,12 @@ void GameCore::Render(MySDLWindow& sdlWindow, const std::vector<Entity>& entitie
     sdlWindow.Render(ecs);
 
     if (gameOver) {
-        Vector2 windowSize = utils::GetWindowSize();
+        Vector2 windowSizeI = utils::GetWindowSize();
         int width, height;
         SDL_QueryTexture(gameOverTexture, NULL, NULL, &width, &height);
         SDL_Rect renderQuad = {
-            (windowSize.X - width) / 2,  // Centered x
-            (windowSize.Y - height) / 2, // Centered y
+            (windowSizeI.X - width) / 2,  // Centered x
+            (windowSizeI.Y - height) / 2, // Centered y
             width,
             height
         };

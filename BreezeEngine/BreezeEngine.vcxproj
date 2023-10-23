@@ -246,6 +246,7 @@ xcopy /s /y "$(SolutionDir)BreezeEngine\SDL2_image.dll" "$(SolutionDir)Game0\$(P
     <ClCompile Include="src\MyMath.cpp" />
     <ClCompile Include="src\MySDLWindow.cpp" />
     <ClCompile Include="src\SettingsResolver.cpp" />
+    <ClCompile Include="src\Utils.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

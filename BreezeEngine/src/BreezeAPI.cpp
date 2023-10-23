@@ -90,3 +90,12 @@ void BreezeAPI::AddCollision(Entity entity, bool isConstrained)
     ecs->AddComponent(entity, CollisionComponent{ .isConstrained = isConstrained });
 }
 
+float BreezeAPI::Rng(float min, float max)
+{
+    return RNG::Int(min, max);
+}
+
+Vector2 BreezeAPI::GetWindowSize()
+{
+    return utils::GetWindowSize();
+}

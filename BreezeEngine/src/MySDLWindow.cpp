@@ -19,7 +19,7 @@ MySDLWindow::MySDLWindow(const char* title, int window_width, int window_height)
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED && SDL_RENDERER_PRESENTVSYNC);
 	if (renderer == nullptr) { std::cout << "Renderer creation failed: " << SDL_GetError() << std::endl; }
 
-	utilData::SetWindowSize(Vector2(window_width, window_height));
+	utils::SetWindowSize(Vector2(window_width, window_height));
 }
 
 SDL_Texture* MySDLWindow::LoadTexture(const char* filePath)

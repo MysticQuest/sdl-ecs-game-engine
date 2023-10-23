@@ -1,28 +1,11 @@
 #pragma once
-#include <SDL.h>
-#include <MySDLWindow.h>
+#include "MyMath.h"
 
-namespace utilData
+struct utils
 {
-	inline Vector2 windowSize = Vector2(0, 0);
+	static Vector2 windowSizeEx;
 
-	inline void SetWindowSize(Vector2 newSize)
-	{
-		windowSize = newSize;
-	}
-}
+	static void SetWindowSize(Vector2 newSize);
 
-namespace utils
-{
-	inline float GetTimeInSeconds()
-	{
-		float t = (float)SDL_GetTicks();
-		t *= 0.001f;
-		return t;
-	}
-
-	inline Vector2 GetWindowSize()
-	{
-		return utilData::windowSize;
-	}
-}
+	static Vector2 GetWindowSize();
+};
