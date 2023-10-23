@@ -5,10 +5,11 @@
 
 World::World() : breezeAPI("engine.ini", "Sample Game 1")
 {
-	Init();
 	windowSize = breezeAPI.GetWindowSize();
 	breezeAPI.RegisterGameUpdates(std::bind(&World::Update, this, std::placeholders::_1));
+	Init();
 	breezeAPI.Run();
+
 }
 
 void World::Init()
@@ -16,14 +17,7 @@ void World::Init()
 	OutputDebugString(L"Initializing World...\n");
 
 	AddPlayer();
-	AddEnemies(1);
-
-	//Entity entity2 = breezeAPI.AddEntity();
-	//std::wstring message2 = L"Added Entity with id: " + std::to_wstring(entity2) + L'\n';
-	//OutputDebugString(message2.c_str());
-	//breezeAPI.AddRenderer(entity2, "pac1.png");
-	//breezeAPI.AddTranform(entity2, Vector2f(300, 300), Vector2f(0, 0), 0, Vector2f(1, 1));
-	//breezeAPI.AddCollision(entity2, true);
+	AddEnemies(2);
 }
 
 void World::AddPlayer()
@@ -62,7 +56,7 @@ void World::Update(int deltaTime)
 
 	if (elapsedTime >= 5000)
 	{
-		AddEnemies(1);
+		AddEnemies(2);
 		elapsedTime = 0;
 	}
 }
