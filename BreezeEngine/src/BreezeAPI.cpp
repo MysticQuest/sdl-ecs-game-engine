@@ -56,7 +56,7 @@ Entity BreezeAPI::AddEntity()
 
 void BreezeAPI::AddTranform(Entity entity, Vector2f pos, Vector2f vel, float rot, Vector2f scale)
 {
-    ecs->AddComponent(entity, TransformComponent{
+    ecs->AddComponent(entity, TransformComponent {
         pos,
         vel,
         rot,
