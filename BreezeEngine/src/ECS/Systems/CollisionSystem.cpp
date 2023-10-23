@@ -7,14 +7,15 @@ void CollisionSystem::Update(ECSManager& ecs)
     // Syncs entity render and aabb
     for (auto& [e, collisionComp] : ecs.collisionComponents)
     {
-        if (ecs.renderComponents.contains(e))
+        if (ecs.renderComponents.contains(e) && ecs.transformComponents.contains(e))
         {
             const SDL_Rect& dstRect = ecs.renderComponents[e].dstRect;
+            const Vector2f& scale = ecs.transformComponents[e].scale;
             ecs.collisionComponents[e].aabb = {
                 static_cast<float>(dstRect.x),
                 static_cast<float>(dstRect.y),
-                static_cast<float>(dstRect.w),
-                static_cast<float>(dstRect.h)
+                static_cast<float>(dstRect.w * scale.X),
+                static_cast<float>(dstRect.h * scale.Y)
             };
         }
     }

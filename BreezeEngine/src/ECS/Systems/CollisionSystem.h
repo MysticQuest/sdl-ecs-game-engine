@@ -2,6 +2,7 @@
 #include "ECS/ECSManager.h"
 #include "ECS/Components/CollisionComponent.h"
 #include "ECS/Components/RenderComponent.h"
+#include "ECS/Components/TransformComponent.h"
 #include <set>
 #include <unordered_set>
 
