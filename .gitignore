@@ -280,3 +280,10 @@ IATETerminologyProvider/IATETerminologyProvider/pluginpackage.manifest_LOCAL_178
 TMX_TranslationProvider/TMX_TranslationProviderWithUITest.sln
 /InterpretBank/InterpretBankTests/Resources/SavedGlossary.xlsx
 /InterpretBank/InterpretBankTests/Resources/exp2.tbx
+
+!BreezeEngine/engine.ini
+!BreezeEngine/SDL2.dll
+!BreezeEngine/SDL2_image.dll
+!BreezeEngine/res/
+!BreezeEngine/lib/
+!BreezeEngine/include/
