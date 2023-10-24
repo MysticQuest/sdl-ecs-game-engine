@@ -69,44 +69,7 @@ void CollisionSystem::Update(ECSManager& ecs)
     {
         ecs.DestroyEntity(entityId);
     }
-
-
-    // Checks all entities for collisions instead of just the player
-        
-    //checkedEntities.clear();
-    //entitiesToDestroy.clear();
-
-    //for (auto& [e1, collisionComp1] : ecs.collisionComponents) {
-    //    if (ecs.renderComponents.contains(e1)) {
-    //        const AABB& box1 = collisionComp1.aabb;
-
-    //        for (const auto& [e2, collisionComp2] : ecs.collisionComponents) {
-    //            if (e2 <= e1 || checkedEntities.find(e2) != checkedEntities.end()) {
-    //                continue;
-    //            }
-
-    //            if (ecs.renderComponents.contains(e2)) {
-    //                const AABB& box2 = collisionComp2.aabb;
-
-    //                if (AABBcollision(box1, box2)) {
-    //                    entitiesToDestroy.insert(e1);
-    //                    entitiesToDestroy.insert(e2);
-    //                }
-    //            }
-    //        }
-    //        checkedEntities.insert(e1);
-    //    }
-    //}
-
-
-    //for (int entityId : entitiesToDestroy)
-    //{
-    //    ecs.DestroyEntity(entityId);
-    //}
-
-    //checkedEntities.clear();
-    //entitiesToDestroy.clear();
-
+    entitiesToDestroy.clear();
 
     // Unused pixel collision code
 
