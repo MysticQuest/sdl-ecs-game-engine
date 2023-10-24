@@ -23,6 +23,8 @@ public:
 
     bool HasInputComponents() const;
 
+    bool DoesEntityExist(Entity entity);
+
     std::unordered_map<Entity, RenderComponent> renderComponents;
     std::unordered_map<Entity, TransformComponent> transformComponents;
     std::unordered_map<Entity, InputComponent> inputComponents;

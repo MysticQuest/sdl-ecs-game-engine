@@ -35,6 +35,10 @@ void TransformSystem::Update(ECSManager& ecs, int deltaTime)
                 transform.velocity = Vector2f(-transform.velocity.X, transform.velocity.Y);
                 transform.position.X = 0;
             }
+            if (transform.position.X + entityWidth < 0 || transform.position.X > static_cast<float>(windowSize.X) + entityWidth)
+            {
+                ecs.DestroyEntity(e);
+            }
 
             // constraint Y
             if (transform.position.Y < 0)
@@ -42,13 +46,17 @@ void TransformSystem::Update(ECSManager& ecs, int deltaTime)
                 transform.velocity = Vector2f(transform.velocity.X, -transform.velocity.Y);
                 transform.position.Y = 0;
             }
-            if (transform.position.Y > windowSize.Y * 0.3f)
+            else if (transform.position.Y > windowSize.Y * 0.3f)
             {
                 transform.velocity = Vector2f(transform.velocity.X, -transform.velocity.Y);
             }
             if (transform.position.Y > static_cast<float>(windowSize.Y) - entityHeight)
             {
                 transform.position.Y = static_cast<float>(windowSize.Y) - entityHeight;
+            }
+            if (transform.position.Y + entityWidth < 0 || transform.position.Y > static_cast<float>(windowSize.Y) + entityWidth)
+            {
+                ecs.DestroyEntity(e);
             }
         }
     }

@@ -47,6 +47,12 @@ void CollisionSystem::Update(ECSManager& ecs)
         }
     }
 
+    for (int entityId : entitiesToDestroy)
+    {
+        ecs.DestroyEntity(entityId);
+    }
+
+
     // Checks all entities for collisions instead of just the player
         
     //checkedEntities.clear();
@@ -75,14 +81,13 @@ void CollisionSystem::Update(ECSManager& ecs)
     //}
 
 
-    for (int entityId : entitiesToDestroy)
-    {
-        ecs.DestroyEntity(entityId);
-    }
+    //for (int entityId : entitiesToDestroy)
+    //{
+    //    ecs.DestroyEntity(entityId);
+    //}
 
     //checkedEntities.clear();
     //entitiesToDestroy.clear();
-
 
 
     // Unused pixel collision code
