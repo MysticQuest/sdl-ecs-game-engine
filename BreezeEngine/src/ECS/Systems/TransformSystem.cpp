@@ -4,6 +4,7 @@
 void TransformSystem::Update(ECSManager& ecs, int deltaTime)
 {
     Vector2 windowSize = utils::GetWindowSize();
+    std::vector<Entity> entitiesToDestroy;
 
     for (auto& [e, transform] : ecs.transformComponents)
     {
@@ -15,14 +16,22 @@ void TransformSystem::Update(ECSManager& ecs, int deltaTime)
         if (collisionIt != ecs.collisionComponents.end())
         {
             auto& collisionComp = collisionIt->second;
+            float entityWidth = collisionComp.aabb.width;
+            float entityHeight = collisionComp.aabb.height;
+
+            if (transform.position.X + entityWidth < 0 ||
+                transform.position.X > static_cast<float>(windowSize.X) + entityWidth ||
+                transform.position.Y + entityWidth < 0 ||
+                transform.position.Y > static_cast<float>(windowSize.Y) + entityWidth)
+            {
+                entitiesToDestroy.push_back(e);
+                continue;
+            }
 
             if (collisionComp.isConstrained == false) 
             { 
                 continue; 
             }
-
-            float entityWidth = collisionComp.aabb.width;
-            float entityHeight = collisionComp.aabb.height;
 
             // constraint X
             if (transform.position.X > static_cast<float>(windowSize.X) - entityWidth)
@@ -35,10 +44,7 @@ void TransformSystem::Update(ECSManager& ecs, int deltaTime)
                 transform.velocity = Vector2f(-transform.velocity.X, transform.velocity.Y);
                 transform.position.X = 0;
             }
-            if (transform.position.X + entityWidth < 0 || transform.position.X > static_cast<float>(windowSize.X) + entityWidth)
-            {
-                ecs.DestroyEntity(e);
-            }
+      
 
             // constraint Y
             if (transform.position.Y < 0)
@@ -54,10 +60,10 @@ void TransformSystem::Update(ECSManager& ecs, int deltaTime)
             {
                 transform.position.Y = static_cast<float>(windowSize.Y) - entityHeight;
             }
-            if (transform.position.Y + entityWidth < 0 || transform.position.Y > static_cast<float>(windowSize.Y) + entityWidth)
-            {
-                ecs.DestroyEntity(e);
-            }
         }
+    }
+    for (const auto& entity : entitiesToDestroy)
+    {
+        ecs.DestroyEntity(entity);
     }
 }

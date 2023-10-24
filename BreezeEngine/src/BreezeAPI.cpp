@@ -92,7 +92,7 @@ void BreezeAPI::AddCollision(Entity entity, bool isConstrained)
 
 Vector2f BreezeAPI::GetPosition(Entity entity)
 {
-    TransformComponent transformComp = ecs->GetComponent<TransformComponent>(entity);
+    TransformComponent& transformComp = ecs->GetComponent<TransformComponent>(entity);
     return transformComp.position;
 }
 

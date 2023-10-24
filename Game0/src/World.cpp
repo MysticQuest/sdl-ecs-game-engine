@@ -17,7 +17,7 @@ void World::Init()
 	OutputDebugString(L"Initializing World...\n");
 
 	AddPlayer();
-	AddEnemies(50);
+	AddEnemies(10);
 }
 
 void World::AddPlayer()
@@ -27,7 +27,7 @@ void World::AddPlayer()
 	OutputDebugString(message.c_str());
 	breezeAPI.AddRenderer(playerEntity, "pac1.png");
 	breezeAPI.AddTranform(playerEntity, Vector2f(windowSize.X/2, windowSize.Y - 10), Vector2f(0, 0), 0, Vector2f(1, 1));
-	breezeAPI.AddInput(playerEntity, CONTROL_SCHEME_XY, .1f);
+	breezeAPI.AddInput(playerEntity, CONTROL_SCHEME_XY, .2f);
 	breezeAPI.AddCollision(playerEntity, true);
 }
 
@@ -66,7 +66,7 @@ void World::Update(int deltaTime)
 
 	if (elapsedTime >= 5000)
 	{
-		AddEnemies(50);
+		AddEnemies(10);
 		elapsedTime = 0;
 	}
 
