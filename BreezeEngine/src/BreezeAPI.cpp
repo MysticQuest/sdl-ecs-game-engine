@@ -85,9 +85,9 @@ void BreezeAPI::AddInput(Entity entity, int controlScheme, float inputSensitivit
     ecs->AddComponent(entity, inputComponent);
 }
 
-void BreezeAPI::AddCollision(Entity entity, bool isConstrained)
+void BreezeAPI::AddCollision(Entity entity, bool isConstrained, bool canHitEnemies)
 {
-    ecs->AddComponent(entity, CollisionComponent{ .isConstrained = isConstrained });
+    ecs->AddComponent(entity, CollisionComponent{ .isConstrained = isConstrained, .canHitEnemies = canHitEnemies });
 }
 
 Vector2f BreezeAPI::GetPosition(Entity entity)

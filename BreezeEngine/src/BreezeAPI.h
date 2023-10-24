@@ -27,7 +27,7 @@ public:
     BREEZEENGINE_API void AddTranform(Entity entity, Vector2f pos, Vector2f vel, float rot, Vector2f scale);
     BREEZEENGINE_API void AddRenderer(Entity entity, const char* texturePath);
     BREEZEENGINE_API void AddInput(Entity entity, int controlScheme, float inputSensitivity);
-    BREEZEENGINE_API void AddCollision(Entity entity, bool isConstrained);
+    BREEZEENGINE_API void AddCollision(Entity entity, bool isConstrained, bool canHitEnemies);
 
     BREEZEENGINE_API float Rng(float min, float max);
     BREEZEENGINE_API Vector2 GetWindowSize();

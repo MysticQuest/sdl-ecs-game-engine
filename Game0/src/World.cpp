@@ -28,7 +28,7 @@ void World::AddPlayer()
 	breezeAPI.AddRenderer(playerEntity, "pac1.png");
 	breezeAPI.AddTranform(playerEntity, Vector2f(windowSize.X/2, windowSize.Y - 10), Vector2f(0, 0), 0, Vector2f(1, 1));
 	breezeAPI.AddInput(playerEntity, CONTROL_SCHEME_XY, .2f);
-	breezeAPI.AddCollision(playerEntity, true);
+	breezeAPI.AddCollision(playerEntity, true, true);
 }
 
 void World::AddEnemies(int count)
@@ -41,7 +41,7 @@ void World::AddEnemies(int count)
 		OutputDebugString(message.c_str());
 		breezeAPI.AddRenderer(lastEntity, "pac1.png");
 		breezeAPI.AddTranform(lastEntity, Vector2f(Rng(0, windowSize.X), Rng(0, windowSize.Y * 0.3f)), Vector2f(Rng(-5, 5), Rng(-3, 3)), 0, Vector2f(1, 1));
-		breezeAPI.AddCollision(lastEntity, true);
+		breezeAPI.AddCollision(lastEntity, true, false);
 	}
 }
 
@@ -54,7 +54,7 @@ void World::FireProjectile() {
 		breezeAPI.AddRenderer(lastEntity, "pac2.png");
 		Vector2f spawnPoint = breezeAPI.GetPosition(entity);
 		breezeAPI.AddTranform(lastEntity, spawnPoint, Vector2f(0, 15), 0, Vector2f(1, 1));
-		breezeAPI.AddCollision(lastEntity, false);
+		breezeAPI.AddCollision(lastEntity, false, false);
 	}
 }
 
