@@ -31,7 +31,9 @@ public:
 
     BREEZEENGINE_API float Rng(float min, float max);
     BREEZEENGINE_API Vector2 GetWindowSize();
+    BREEZEENGINE_API Vector2f GetPosition(Entity entity);
     BREEZEENGINE_API bool InputExists();
+    BREEZEENGINE_API bool DoesEntityExist(Entity entity);
 
     BREEZEENGINE_API void RegisterGameUpdates(const std::function<void(int)>& update);
 

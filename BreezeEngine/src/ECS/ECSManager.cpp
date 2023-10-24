@@ -44,6 +44,11 @@ bool ECSManager::HasInputComponents() const
     return !inputComponents.empty();
 }
 
+bool ECSManager::DoesEntityExist(Entity entity)
+{
+    return renderComponents.find(entity) != renderComponents.end();
+}
+
 template<typename T>
 std::unordered_map<Entity, T>& ECSManager::GetComponentMap()
 {
@@ -89,6 +94,10 @@ template void ECSManager::AddComponent<RenderComponent>(Entity, RenderComponent)
 template void ECSManager::AddComponent<TransformComponent>(Entity, TransformComponent);
 template void ECSManager::AddComponent<InputComponent>(Entity, InputComponent);
 template void ECSManager::AddComponent<CollisionComponent>(Entity, CollisionComponent);
+template RenderComponent& ECSManager::GetComponent<RenderComponent>(Entity);
+template TransformComponent& ECSManager::GetComponent<TransformComponent>(Entity);
+template InputComponent& ECSManager::GetComponent<InputComponent>(Entity);
+template CollisionComponent& ECSManager::GetComponent<CollisionComponent>(Entity);
 template void ECSManager::RemoveComponent<RenderComponent>(Entity);
 template void ECSManager::RemoveComponent<TransformComponent>(Entity);
 template void ECSManager::RemoveComponent<InputComponent>(Entity);

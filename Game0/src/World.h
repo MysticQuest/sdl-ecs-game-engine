@@ -16,10 +16,12 @@ private:
 
 	void AddPlayer();
 	void AddEnemies(int count);
-	void Fire(Entity entity);
+	void FireProjectile();
 	float Rng(float min, float max);
 	Vector2 windowSize;
 
 	int elapsedTime = 0;
+	int fireCooldown = 0;
 	std::vector<Entity> entities;
+	std::vector<Entity> projectiles;
 };

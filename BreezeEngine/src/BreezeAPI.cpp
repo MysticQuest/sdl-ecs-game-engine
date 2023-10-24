@@ -90,9 +90,20 @@ void BreezeAPI::AddCollision(Entity entity, bool isConstrained)
     ecs->AddComponent(entity, CollisionComponent{ .isConstrained = isConstrained });
 }
 
+Vector2f BreezeAPI::GetPosition(Entity entity)
+{
+    TransformComponent transformComp = ecs->GetComponent<TransformComponent>(entity);
+    return transformComp.position;
+}
+
 bool BreezeAPI::InputExists()
 {
     return ecs->HasInputComponents();
+}
+
+bool BreezeAPI::DoesEntityExist(Entity entity)
+{
+    return ecs->DoesEntityExist(entity);
 }
 
 float BreezeAPI::Rng(float min, float max)

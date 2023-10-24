@@ -45,20 +45,41 @@ void World::AddEnemies(int count)
 	}
 }
 
-void World::Fire(Entity entity)
-{
-	//breezeAPI.AddEntity();
+void World::FireProjectile() {
+	for (const Entity entity : entities) {
+		projectiles.push_back(breezeAPI.AddEntity());
+		Entity& lastEntity = projectiles.back();
+		std::wstring message = L"Added Projectile with id: " + std::to_wstring(lastEntity) + L'\n';
+		OutputDebugString(message.c_str());
+		breezeAPI.AddRenderer(lastEntity, "pac2.png");
+		Vector2f spawnPoint = breezeAPI.GetPosition(entity);
+		breezeAPI.AddTranform(lastEntity, spawnPoint, Vector2f(0, 15), 0, Vector2f(1, 1));
+		breezeAPI.AddCollision(lastEntity, false);
+	}
 }
+
 
 void World::Update(int deltaTime)
 {
 	elapsedTime += deltaTime;
+	fireCooldown += deltaTime;
 
 	if (elapsedTime >= 5000)
 	{
 		AddEnemies(50);
 		elapsedTime = 0;
 	}
+
+	if (fireCooldown >= 2000)
+	{
+		FireProjectile();
+		fireCooldown = 0;
+	}
+
+	auto it = std::remove_if(entities.begin(), entities.end(), [this](Entity entity) {
+		return !breezeAPI.DoesEntityExist(entity);
+		});
+	entities.erase(it, entities.end());
 
 	if (!breezeAPI.InputExists())
 	{
