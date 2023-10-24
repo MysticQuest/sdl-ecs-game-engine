@@ -28,21 +28,39 @@ void CollisionSystem::Update(ECSManager& ecs)
     const int playerEntity = ecs.inputComponents.begin()->first;
     const AABB& box1 = ecs.collisionComponents[playerEntity].aabb;
 
-    for (const auto& [e2, collisionComp2] : ecs.collisionComponents) 
+    for (const auto& [e1, collisionComp2] : ecs.collisionComponents)
     {
-        if (e2 == playerEntity) 
+        if (e1 == playerEntity)
         {
             continue;
         }
 
-        if (ecs.collisionComponents.contains(e2)) 
+        if (!collisionComp2.canHitEnemies)
         {
             const AABB& box2 = collisionComp2.aabb;
 
-            if (AABBcollision(box1, box2)) 
+            if (AABBcollision(box1, box2))
             {
                 entitiesToDestroy.insert(playerEntity);
-                entitiesToDestroy.insert(e2);
+                entitiesToDestroy.insert(e1);
+            }
+        }
+        else  // this entity can hit other entities but not the player
+        {
+            for (const auto& [e2, collisionComp2] : ecs.collisionComponents)
+            {
+                if (e2 == playerEntity || e1 == e2 || !collisionComp2.canHitEnemies)
+                {
+                    continue;
+                }
+
+                const AABB& box2 = collisionComp2.aabb;
+
+                if (AABBcollision(box1, box2))
+                {
+                    entitiesToDestroy.insert(e1);
+                    entitiesToDestroy.insert(e2);
+                }
             }
         }
     }

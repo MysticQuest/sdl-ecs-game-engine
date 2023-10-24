@@ -5,4 +5,5 @@ struct CollisionComponent
 {
     AABB aabb;
     bool isConstrained = true;
+    bool canHitEnemies = true;
 };
