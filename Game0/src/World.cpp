@@ -58,7 +58,6 @@ void World::FireProjectile() {
 	}
 }
 
-
 void World::Update(int deltaTime)
 {
 	elapsedTime += deltaTime;

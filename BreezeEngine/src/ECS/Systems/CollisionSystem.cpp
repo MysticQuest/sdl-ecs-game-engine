@@ -26,20 +26,22 @@ void CollisionSystem::Update(ECSManager& ecs)
     }
 
     const int playerEntity = ecs.inputComponents.begin()->first;
-    const AABB& box1 = ecs.collisionComponents[playerEntity].aabb;
+    const AABB& playerBox = ecs.collisionComponents[playerEntity].aabb;
 
-    for (const auto& [e1, collisionComp2] : ecs.collisionComponents)
+    std::unordered_set<int> entitiesToDestroy; 
+
+    for (const auto& [e1, collisionComp1] : ecs.collisionComponents)
     {
         if (e1 == playerEntity)
         {
             continue;
         }
 
-        if (!collisionComp2.canHitEnemies)
-        {
-            const AABB& box2 = collisionComp2.aabb;
+        const AABB& box1 = collisionComp1.aabb;
 
-            if (AABBcollision(box1, box2))
+        if (!collisionComp1.canHitEnemies)  // this entity can hit the player
+        {
+            if (AABBcollision(playerBox, box1))
             {
                 entitiesToDestroy.insert(playerEntity);
                 entitiesToDestroy.insert(e1);
@@ -49,7 +51,7 @@ void CollisionSystem::Update(ECSManager& ecs)
         {
             for (const auto& [e2, collisionComp2] : ecs.collisionComponents)
             {
-                if (e2 == playerEntity || e1 == e2 || !collisionComp2.canHitEnemies)
+                if (e2 == playerEntity || e1 == e2)
                 {
                     continue;
                 }
@@ -64,12 +66,12 @@ void CollisionSystem::Update(ECSManager& ecs)
             }
         }
     }
-
     for (int entityId : entitiesToDestroy)
     {
         ecs.DestroyEntity(entityId);
     }
     entitiesToDestroy.clear();
+
 
     // Unused pixel collision code
 
