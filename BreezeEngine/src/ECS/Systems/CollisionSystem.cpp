@@ -5,18 +5,9 @@ CollisionSystem::CollisionSystem(SDL_Renderer* renderer) : m_renderer(renderer) 
 void CollisionSystem::Update(ECSManager& ecs)
 {
     SyncEntityRenderAndAABB(ecs);
-    if (ecs.inputComponents.empty())
-    {
-        return;
-    }
-
-    const int playerEntity = ecs.inputComponents.begin()->first;
-    const AABB& playerBox = ecs.collisionComponents[playerEntity].aabb;
 
     std::unordered_set<int> entitiesToDestroy;
-
-    CheckCollisionsWithPlayer(ecs, playerEntity, playerBox, entitiesToDestroy);
-    CheckCollisionsBetweenEntities(ecs, playerEntity, entitiesToDestroy);
+    CollisionSystem::CheckCollisions(ecs, entitiesToDestroy);
 
     DestroyEntities(ecs, entitiesToDestroy);
 }
@@ -40,30 +31,16 @@ void CollisionSystem::SyncEntityRenderAndAABB(ECSManager& ecs)
     }
 }
 
-void CollisionSystem::CheckCollisionsWithPlayer(ECSManager& ecs, int playerEntity, const AABB& playerBox, std::unordered_set<int>& entitiesToDestroy)
+void CollisionSystem::CheckCollisions(ECSManager& ecs, std::unordered_set<int>& entitiesToDestroy)
 {
-    for (const auto& [e1, collisionComp1] : ecs.collisionComponents)
+    if (ecs.inputComponents.empty())
     {
-        if (e1 == playerEntity)
-        {
-            continue;
-        }
-
-        const AABB& box1 = collisionComp1.aabb;
-
-        if (!collisionComp1.canHitEnemies)  // this entity can hit the player
-        {
-            if (AABBcollision(playerBox, box1))
-            {
-                entitiesToDestroy.insert(playerEntity);
-                entitiesToDestroy.insert(e1);
-            }
-        }
+        return;
     }
-}
 
-void CollisionSystem::CheckCollisionsBetweenEntities(ECSManager& ecs, int playerEntity, std::unordered_set<int>& entitiesToDestroy)
-{
+    const int playerEntity = ecs.inputComponents.begin()->first;
+    const AABB& playerBox = ecs.collisionComponents[playerEntity].aabb;
+
     auto it1 = ecs.collisionComponents.begin();
     while (it1 != ecs.collisionComponents.end())
     {
@@ -71,10 +48,10 @@ void CollisionSystem::CheckCollisionsBetweenEntities(ECSManager& ecs, int player
         const AABB& box1 = it1->second.aabb;
         const bool canHitEnemies1 = it1->second.canHitEnemies;
 
-        if (e1 == playerEntity)
+        if (e1 != playerEntity && !canHitEnemies1 && AABBcollision(playerBox, box1))
         {
-            ++it1;
-            continue;
+            entitiesToDestroy.insert(playerEntity);
+            entitiesToDestroy.insert(e1);
         }
 
         auto it2 = std::next(it1);
@@ -84,7 +61,7 @@ void CollisionSystem::CheckCollisionsBetweenEntities(ECSManager& ecs, int player
             const AABB& box2 = it2->second.aabb;
             const bool canHitEnemies2 = it2->second.canHitEnemies;
 
-            if (e2 != playerEntity && (canHitEnemies1 || canHitEnemies2) && AABBcollision(box1, box2))
+            if (e1 != playerEntity && e2 != playerEntity && (canHitEnemies1 || canHitEnemies2) && AABBcollision(box1, box2))
             {
                 entitiesToDestroy.insert(e1);
                 entitiesToDestroy.insert(e2);
