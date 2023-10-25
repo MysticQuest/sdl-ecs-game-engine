@@ -14,7 +14,6 @@ void CollisionSystem::Update(ECSManager& ecs)
 
 void CollisionSystem::SyncEntityRenderAndAABB(ECSManager& ecs)
 {
-    // Syncs entity render and aabb
     for (auto& [e, collisionComp] : ecs.collisionComponents)
     {
         if (ecs.renderComponents.contains(e) && ecs.transformComponents.contains(e))
