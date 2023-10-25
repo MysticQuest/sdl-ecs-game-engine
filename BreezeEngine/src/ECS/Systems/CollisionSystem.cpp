@@ -4,6 +4,25 @@ CollisionSystem::CollisionSystem(SDL_Renderer* renderer) : m_renderer(renderer) 
 
 void CollisionSystem::Update(ECSManager& ecs)
 {
+    SyncEntityRenderAndAABB(ecs);
+    if (ecs.inputComponents.empty())
+    {
+        return;
+    }
+
+    const int playerEntity = ecs.inputComponents.begin()->first;
+    const AABB& playerBox = ecs.collisionComponents[playerEntity].aabb;
+
+    std::unordered_set<int> entitiesToDestroy;
+
+    CheckCollisionsWithPlayer(ecs, playerEntity, playerBox, entitiesToDestroy);
+    CheckCollisionsBetweenEntities(ecs, playerEntity, entitiesToDestroy);
+
+    DestroyEntities(ecs, entitiesToDestroy);
+}
+
+void CollisionSystem::SyncEntityRenderAndAABB(ECSManager& ecs)
+{
     // Syncs entity render and aabb
     for (auto& [e, collisionComp] : ecs.collisionComponents)
     {
@@ -19,17 +38,10 @@ void CollisionSystem::Update(ECSManager& ecs)
             };
         }
     }
+}
 
-    if (ecs.inputComponents.empty()) 
-    {
-        return;
-    }
-
-    const int playerEntity = ecs.inputComponents.begin()->first;
-    const AABB& playerBox = ecs.collisionComponents[playerEntity].aabb;
-
-    std::unordered_set<int> entitiesToDestroy; 
-
+void CollisionSystem::CheckCollisionsWithPlayer(ECSManager& ecs, int playerEntity, const AABB& playerBox, std::unordered_set<int>& entitiesToDestroy)
+{
     for (const auto& [e1, collisionComp1] : ecs.collisionComponents)
     {
         if (e1 == playerEntity)
@@ -47,66 +59,49 @@ void CollisionSystem::Update(ECSManager& ecs)
                 entitiesToDestroy.insert(e1);
             }
         }
-        else  // this entity can hit other entities but not the player
-        {
-            for (const auto& [e2, collisionComp2] : ecs.collisionComponents)
-            {
-                if (e2 == playerEntity || e1 == e2)
-                {
-                    continue;
-                }
-
-                const AABB& box2 = collisionComp2.aabb;
-
-                if (AABBcollision(box1, box2))
-                {
-                    entitiesToDestroy.insert(e1);
-                    entitiesToDestroy.insert(e2);
-                }
-            }
-        }
     }
+}
+
+void CollisionSystem::CheckCollisionsBetweenEntities(ECSManager& ecs, int playerEntity, std::unordered_set<int>& entitiesToDestroy)
+{
+    auto it1 = ecs.collisionComponents.begin();
+    while (it1 != ecs.collisionComponents.end())
+    {
+        const int e1 = it1->first;
+        const AABB& box1 = it1->second.aabb;
+        const bool canHitEnemies1 = it1->second.canHitEnemies;
+
+        if (e1 == playerEntity)
+        {
+            ++it1;
+            continue;
+        }
+
+        auto it2 = std::next(it1);
+        while (it2 != ecs.collisionComponents.end())
+        {
+            const int e2 = it2->first;
+            const AABB& box2 = it2->second.aabb;
+            const bool canHitEnemies2 = it2->second.canHitEnemies;
+
+            if (e2 != playerEntity && (canHitEnemies1 || canHitEnemies2) && AABBcollision(box1, box2))
+            {
+                entitiesToDestroy.insert(e1);
+                entitiesToDestroy.insert(e2);
+            }
+            ++it2;
+        }
+        ++it1;
+    }
+}
+
+void CollisionSystem::DestroyEntities(ECSManager& ecs, std::unordered_set<int>& entitiesToDestroy)
+{
     for (int entityId : entitiesToDestroy)
     {
         ecs.DestroyEntity(entityId);
     }
     entitiesToDestroy.clear();
-
-
-    // Unused pixel collision code
-
-    //for (auto& [e1, collisionComp] : ecs.collisionComponents)
-    //{
-    //    if (ecs.renderComponents.contains(e1))
-    //    {
-    //        const AABB& box1 = ecs.collisionComponents[e1].aabb;
-
-    //        // TODO: optimize this
-    //        for (int e2 = e1 + 1; e2 <= max_entity; e2++)
-    //        {
-    //            if (ecs.collisionComponents.contains(e2) && ecs.renderComponents.contains(e2))
-    //            {
-    //                const AABB& box2 = ecs.collisionComponents[e2].aabb;
-
-    //                if (AABBcollision(box1, box2))
-    //                {
-    //                    // If AABBs are colliding, check for per-pixel collision
-    //                    SDL_Texture* texture1 = ecs.renderComponents[e1].texture;
-    //                    SDL_Texture* texture2 = ecs.renderComponents[e2].texture;
-
-    //                    SDL_Rect rect1 = { static_cast<int>(box1.x), static_cast<int>(box1.y), static_cast<int>(box1.width), static_cast<int>(box1.height) };
-    //                    SDL_Rect rect2 = { static_cast<int>(box2.x), static_cast<int>(box2.y), static_cast<int>(box2.width), static_cast<int>(box2.height) };
-
-    //                    if (PixelCollision(texture1, rect1, texture2, rect2))
-    //                    {
-    //                        entitiesToDestroy.insert(e1);
-    //                        entitiesToDestroy.insert(e2);
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
 }
 
 bool CollisionSystem::AABBcollision(const AABB& a, const AABB& b)
