@@ -18,8 +18,8 @@ private:
     bool PixelIsSolid(SDL_Texture* texture, int x, int y);
 
     void SyncEntityRenderAndAABB(ECSManager& ecs);
-    void CheckCollisions(ECSManager& ecs, std::unordered_set<int>& entitiesToDestroy);
-    void DestroyEntities(ECSManager& ecs, std::unordered_set<int>& entitiesToDestroy);
+    void CheckCollisions(ECSManager& ecs, std::unordered_set<size_t>& entitiesToDestroy);
+    void DestroyEntities(ECSManager& ecs, std::unordered_set<size_t>& entitiesToDestroy);
 
     SDL_Renderer* m_renderer;
 };
