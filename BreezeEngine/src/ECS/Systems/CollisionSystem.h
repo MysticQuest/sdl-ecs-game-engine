@@ -18,6 +18,7 @@ private:
     bool PixelIsSolid(SDL_Texture* texture, int x, int y);
 
     void SyncEntityRenderAndAABB(ECSManager& ecs);
+    void CheckCollisions(ECSManager& ecs, std::unordered_set<int>& entitiesToDestroy);
     void CheckCollisionsWithPlayer(ECSManager& ecs, int playerEntity, const AABB& playerBox, std::unordered_set<int>& entitiesToDestroy);
     void CheckCollisionsBetweenEntities(ECSManager& ecs, int playerEntity, std::unordered_set<int>& entitiesToDestroy);
     void DestroyEntities(ECSManager& ecs, std::unordered_set<int>& entitiesToDestroy);
