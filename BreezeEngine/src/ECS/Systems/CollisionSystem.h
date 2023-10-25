@@ -19,8 +19,6 @@ private:
 
     void SyncEntityRenderAndAABB(ECSManager& ecs);
     void CheckCollisions(ECSManager& ecs, std::unordered_set<int>& entitiesToDestroy);
-    void CheckCollisionsWithPlayer(ECSManager& ecs, int playerEntity, const AABB& playerBox, std::unordered_set<int>& entitiesToDestroy);
-    void CheckCollisionsBetweenEntities(ECSManager& ecs, int playerEntity, std::unordered_set<int>& entitiesToDestroy);
     void DestroyEntities(ECSManager& ecs, std::unordered_set<int>& entitiesToDestroy);
 
     SDL_Renderer* m_renderer;
