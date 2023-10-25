@@ -111,6 +111,11 @@ float BreezeAPI::Rng(float min, float max)
     return RNG::Float(min, max);
 }
 
+int BreezeAPI::Rng(int min, int max)
+{
+    return RNG::Int(min, max);
+}
+
 Vector2 BreezeAPI::GetWindowSize()
 {
     return utils::GetWindowSize();

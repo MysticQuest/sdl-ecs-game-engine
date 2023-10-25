@@ -40,7 +40,7 @@ void World::AddEnemies(int count)
 		std::wstring message = L"Added Entity with id: " + std::to_wstring(lastEntity) + L'\n';
 		OutputDebugString(message.c_str());
 		breezeAPI.AddRenderer(lastEntity, "pac1.png");
-		breezeAPI.AddTranform(lastEntity, Vector2f(Rng(0, windowSize.X), Rng(0, windowSize.Y * 0.3f)), Vector2f(Rng(-5, 5), Rng(-3, 3)), 0, Vector2f(1, 1));
+		breezeAPI.AddTranform(lastEntity, Vector2f(Rng(0, windowSize.X),Rng(0, windowSize.Y * 0.3f)), Vector2f(Rng(-5, 5), Rng(-3, 3)), 0, Vector2f(1, 1));
 		breezeAPI.AddCollision(lastEntity, true, false);
 	}
 }

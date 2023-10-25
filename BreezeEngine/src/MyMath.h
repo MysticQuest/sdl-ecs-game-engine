@@ -8,7 +8,7 @@ struct Vector2f
 	:X(0.0f), Y(0.0f) { }
 
 	Vector2f(float x, float y)
-	:X(x), Y(y) { }
+	:X(static_cast<float>(x)), Y(static_cast<float>(y)) { }
 
 	inline Vector2f operator+(const Vector2f& other) const
 	{
