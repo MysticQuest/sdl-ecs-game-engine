@@ -3,7 +3,7 @@
 
 struct CollisionComponent
 {
-    AABB aabb;
+    AABB aabb { 0, 0, 0, 0 };
     bool isConstrained = true;
     bool canHitEnemies = true;
 };

@@ -108,7 +108,7 @@ bool BreezeAPI::DoesEntityExist(Entity entity)
 
 float BreezeAPI::Rng(float min, float max)
 {
-    return RNG::Int(min, max);
+    return RNG::Float(min, max);
 }
 
 Vector2 BreezeAPI::GetWindowSize()
