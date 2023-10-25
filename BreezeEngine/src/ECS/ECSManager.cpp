@@ -1,31 +1,21 @@
 #include "ECSManager.h"
 #include <type_traits>
 
-// Explicit template specialization declarations
-template<>
-std::unordered_map<Entity, RenderComponent>& ECSManager::GetComponentMap();
-template<>
-std::unordered_map<Entity, TransformComponent>& ECSManager::GetComponentMap();
-template<>
-std::unordered_map<Entity, InputComponent>& ECSManager::GetComponentMap();
-template<>
-std::unordered_map<Entity, CollisionComponent>& ECSManager::GetComponentMap();
-
-template<typename T>
+template<IsValidComponent T>
 void ECSManager::AddComponent(Entity entity, T component)
 {
     auto& componentMap = GetComponentMap<T>();
     componentMap[entity] = component;
 }
 
-template<typename T>
+template<IsValidComponent T>
 void ECSManager::RemoveComponent(Entity entity)
 {
     auto& componentMap = GetComponentMap<T>();
     componentMap.erase(entity);
 }
 
-template<typename T>
+template<IsValidComponent T>
 T& ECSManager::GetComponent(Entity entity)
 {
     return GetComponentMap<T>()[entity];
@@ -49,17 +39,9 @@ bool ECSManager::DoesEntityExist(Entity entity)
     return renderComponents.find(entity) != renderComponents.end();
 }
 
-template<typename T>
+template<IsValidComponent T>
 std::unordered_map<Entity, T>& ECSManager::GetComponentMap()
 {
-    static_assert(
-        std::is_same<T, RenderComponent>::value ||
-        std::is_same<T, TransformComponent>::value ||
-        std::is_same<T, InputComponent>::value ||
-        std::is_same<T, CollisionComponent>::value,
-        "Invalid component type."
-        );
-
     static std::unordered_map<Entity, T> emptyMap;
     return emptyMap;
 }
