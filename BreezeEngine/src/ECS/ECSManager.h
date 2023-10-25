@@ -7,22 +7,28 @@
 #include "Components/TransformComponent.h"
 #include "Components/InputComponent.h"
 
+template<typename T>
+concept IsValidComponent = 
+std::is_same_v<T, RenderComponent> ||
+std::is_same_v<T, TransformComponent> ||
+std::is_same_v<T, InputComponent> ||
+std::is_same_v<T, CollisionComponent>;
+
 class ECSManager
 {
 public:
-    template<typename T>
+    template<IsValidComponent  T>
     void AddComponent(Entity entity, T component);
 
-    template<typename T>
+    template<IsValidComponent  T>
     void RemoveComponent(Entity entity);
 
-    template<typename T>
+    template<IsValidComponent  T>
     T& GetComponent(Entity entity);
 
     void DestroyEntity(Entity entity);
 
     bool HasInputComponents() const;
-
     bool DoesEntityExist(Entity entity);
 
     std::unordered_map<Entity, RenderComponent> renderComponents;
@@ -31,6 +37,6 @@ public:
     std::unordered_map<Entity, CollisionComponent> collisionComponents;
 
 private:
-    template<typename T>
+    template<IsValidComponent T>
     std::unordered_map<Entity, T>& GetComponentMap();
 };
