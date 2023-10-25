@@ -6,7 +6,7 @@ void CollisionSystem::Update(ECSManager& ecs)
 {
     SyncEntityRenderAndAABB(ecs);
 
-    std::unordered_set<int> entitiesToDestroy;
+    std::unordered_set<size_t> entitiesToDestroy;
     CollisionSystem::CheckCollisions(ecs, entitiesToDestroy);
 
     DestroyEntities(ecs, entitiesToDestroy);
@@ -30,20 +30,20 @@ void CollisionSystem::SyncEntityRenderAndAABB(ECSManager& ecs)
     }
 }
 
-void CollisionSystem::CheckCollisions(ECSManager& ecs, std::unordered_set<int>& entitiesToDestroy)
+void CollisionSystem::CheckCollisions(ECSManager& ecs, std::unordered_set<size_t>& entitiesToDestroy)
 {
     if (ecs.inputComponents.empty())
     {
         return;
     }
 
-    const int playerEntity = ecs.inputComponents.begin()->first;
+    const size_t playerEntity = ecs.inputComponents.begin()->first;
     const AABB& playerBox = ecs.collisionComponents[playerEntity].aabb;
 
     auto it1 = ecs.collisionComponents.begin();
     while (it1 != ecs.collisionComponents.end())
     {
-        const int e1 = it1->first;
+        const size_t e1 = it1->first;
         const AABB& box1 = it1->second.aabb;
         const bool canHitEnemies1 = it1->second.canHitEnemies;
 
@@ -56,7 +56,7 @@ void CollisionSystem::CheckCollisions(ECSManager& ecs, std::unordered_set<int>& 
         auto it2 = std::next(it1);
         while (it2 != ecs.collisionComponents.end())
         {
-            const int e2 = it2->first;
+            const size_t e2 = it2->first;
             const AABB& box2 = it2->second.aabb;
             const bool canHitEnemies2 = it2->second.canHitEnemies;
 
@@ -71,9 +71,9 @@ void CollisionSystem::CheckCollisions(ECSManager& ecs, std::unordered_set<int>& 
     }
 }
 
-void CollisionSystem::DestroyEntities(ECSManager& ecs, std::unordered_set<int>& entitiesToDestroy)
+void CollisionSystem::DestroyEntities(ECSManager& ecs, std::unordered_set<size_t>& entitiesToDestroy)
 {
-    for (int entityId : entitiesToDestroy)
+    for (size_t entityId : entitiesToDestroy)
     {
         ecs.DestroyEntity(entityId);
     }
