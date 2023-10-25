@@ -1,3 +1,5 @@
+#pragma once
+
 #include <memory>
 #include <iostream>
 #include <functional>
@@ -30,6 +32,7 @@ public:
     BREEZEENGINE_API void AddCollision(Entity entity, bool isConstrained, bool canHitEnemies);
 
     BREEZEENGINE_API float Rng(float min, float max);
+    BREEZEENGINE_API int Rng(int min, int max);
     BREEZEENGINE_API Vector2 GetWindowSize();
     BREEZEENGINE_API Vector2f GetPosition(Entity entity);
     BREEZEENGINE_API bool InputExists();
