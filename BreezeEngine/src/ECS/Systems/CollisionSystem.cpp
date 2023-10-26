@@ -20,11 +20,48 @@ void CollisionSystem::SyncEntityRenderAndAABB(ECSManager& ecs)
         {
             const SDL_Rect& dstRect = ecs.renderComponents[e].dstRect;
             const Vector2f& scale = ecs.transformComponents[e].scale;
+            const float rotation = ecs.transformComponents[e].rotation;  // in degrees
+
+            // TEMP : TODO -> let sdl calculate rotation instead
+
+            // rotation to radians
+            float rotationInRadians = rotation * (M_PI / 180.0f);
+
+            // original positions
+            float x1 = dstRect.x;
+            float y1 = dstRect.y;
+            float x2 = dstRect.x + dstRect.w * scale.X;
+            float y2 = dstRect.y + dstRect.h * scale.Y;
+
+            // computes angle
+            float centerX = (x1 + x2) / 2.0f;
+            float centerY = (y1 + y2) / 2.0f;
+
+            // updates corners based on rotation
+            auto rotatePoint = [&](float x, float y) -> std::pair<float, float> {
+                float dx = x - centerX;
+                float dy = y - centerY;
+                float newX = centerX + dx * cos(rotationInRadians) - dy * sin(rotationInRadians);
+                float newY = centerY + dx * sin(rotationInRadians) + dy * cos(rotationInRadians);
+                return { newX, newY };
+                };
+
+            auto [newX1, newY1] = rotatePoint(x1, y1);
+            auto [newX2, newY2] = rotatePoint(x2, y1);
+            auto [newX3, newY3] = rotatePoint(x1, y2);
+            auto [newX4, newY4] = rotatePoint(x2, y2);
+
+            // update AABB to fit the rotated rectangle
+            float minX = std::min({ newX1, newX2, newX3, newX4 });
+            float maxX = std::max({ newX1, newX2, newX3, newX4 });
+            float minY = std::min({ newY1, newY2, newY3, newY4 });
+            float maxY = std::max({ newY1, newY2, newY3, newY4 });
+
             ecs.collisionComponents[e].aabb = {
-                static_cast<float>(dstRect.x),
-                static_cast<float>(dstRect.y),
-                static_cast<float>(dstRect.w * scale.X),
-                static_cast<float>(dstRect.h * scale.Y)
+                minX,
+                minY,
+                maxX - minX,
+                maxY - minY
             };
         }
     }

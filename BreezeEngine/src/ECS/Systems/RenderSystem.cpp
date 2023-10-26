@@ -24,7 +24,7 @@ void RenderSystem::Render(ECSManager& ecs, SDL_Renderer* renderer)
         scaledDstRect.w = static_cast<int>(scaledDstRect.w * ecs.transformComponents[e].scale.X);
         scaledDstRect.h = static_cast<int>(scaledDstRect.h * ecs.transformComponents[e].scale.Y);
 
-        double angle = static_cast<double>(ecs.transformComponents[e].rotation); // Now rotation is a single value representing the angle
+        double angle = static_cast<double>(ecs.transformComponents[e].rotation);
         SDL_Point center = { scaledDstRect.w / 2, scaledDstRect.h / 2 };
         SDL_RendererFlip flip = SDL_FLIP_NONE;
 
