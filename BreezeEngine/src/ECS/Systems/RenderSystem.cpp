@@ -39,11 +39,13 @@ void RenderSystem::Render(ECSManager& ecs, SDL_Renderer* renderer)
             flip
         );
 
+#ifdef DEBUG
         // AABB Debug
         if (ecs.collisionComponents.contains(e))
         {
             DrawAABB(renderer, ecs.collisionComponents[e].aabb);
         }
+#endif
     }
 }
 
