@@ -30,10 +30,10 @@ void World::AddPlayer()
 	Entity playerEntity = breezeAPI.AddEntity();
 	std::wstring message = L"Added Entity with id: " + std::to_wstring(playerEntity) + L'\n';
 	OutputDebugString(message.c_str());
-	breezeAPI.AddRenderer(playerEntity, "pac1.png");
-	breezeAPI.AddTranform(playerEntity, Vector2f(windowSize.X/2, windowSize.Y - 10), Vector2f(0, 0), 0, Vector2f(1, 1));
+	breezeAPI.AddRenderer(playerEntity, "g0_player.png");
+	breezeAPI.AddTranform(playerEntity, Vector2f(windowSize.X/2, windowSize.Y - 100), Vector2f(0, 0), 0, Vector2f(1, 1));
 	breezeAPI.AddInput(playerEntity, CONTROL_SCHEME_XY, .2f);
-	breezeAPI.AddCollision(playerEntity, true, true);
+	breezeAPI.AddCollision(playerEntity, true, false);
 }
 
 void World::AddEnemies(int count)
@@ -44,7 +44,7 @@ void World::AddEnemies(int count)
 		Entity& lastEntity = entities.back();
 		std::wstring message = L"Added Entity with id: " + std::to_wstring(lastEntity) + L'\n';
 		OutputDebugString(message.c_str());
-		breezeAPI.AddRenderer(lastEntity, "pac1.png");
+		breezeAPI.AddRenderer(lastEntity, "g0_enemy.png");
 		breezeAPI.AddTranform(lastEntity, Vector2f(Rng(0, windowSize.X),Rng(0, windowSize.Y * 0.3f)), Vector2f(Rng(-5, 5), Rng(-3, 3)), 0, Vector2f(1, 1));
 		breezeAPI.AddCollision(lastEntity, true, false);
 	}
@@ -56,9 +56,9 @@ void World::FireProjectile() {
 		Entity& lastEntity = projectiles.back();
 		std::wstring message = L"Added Projectile with id: " + std::to_wstring(lastEntity) + L'\n';
 		OutputDebugString(message.c_str());
-		breezeAPI.AddRenderer(lastEntity, "pac2.png");
+		breezeAPI.AddRenderer(lastEntity, "g0_shotBlue.png");
 		Vector2f spawnPoint = breezeAPI.GetPosition(entity);
-		breezeAPI.AddTranform(lastEntity, spawnPoint, Vector2f(0, 15), 0, Vector2f(1, 1));
+		breezeAPI.AddTranform(lastEntity, spawnPoint, Vector2f(0, 15), 90, Vector2f(1, 1));
 		breezeAPI.AddCollision(lastEntity, false, false);
 	}
 }
@@ -69,9 +69,9 @@ void World::PlayerFire()
 	Entity& lastEntity = projectiles.back();
 	std::wstring message = L"Added Projectile with id: " + std::to_wstring(lastEntity) + L'\n';
 	OutputDebugString(message.c_str());
-	breezeAPI.AddRenderer(lastEntity, "pac2.png");
+	breezeAPI.AddRenderer(lastEntity, "g0_shotRed.png");
 	Vector2f spawnPoint = breezeAPI.GetPosition(1);
-	breezeAPI.AddTranform(lastEntity, spawnPoint, Vector2f(0, -15), 0, Vector2f(1, 1));
+	breezeAPI.AddTranform(lastEntity, spawnPoint, Vector2f(0, -15), 270, Vector2f(1, 1));
 	breezeAPI.AddCollision(lastEntity, false, true);
 }
 
