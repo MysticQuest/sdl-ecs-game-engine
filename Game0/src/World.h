@@ -18,6 +18,7 @@ private:
 	void AddPlayer();
 	void AddEnemies(int count);
 	void FireProjectile();
+	void PlayerFire();
 	float Rng(float min, float max);
 	Vector2 windowSize;
 
