@@ -46,7 +46,7 @@ void GameCore::PollEvents()
     }
 }
 
-void GameCore::RegisterObserver(const std::function<void(int)>& callback) 
+void GameCore::RegisterUpdateObserver(const std::function<void(float)>& callback) 
 {
     updateObserver = callback;
 }

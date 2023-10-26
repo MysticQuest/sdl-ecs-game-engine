@@ -38,13 +38,13 @@ public:
     BREEZEENGINE_API bool InputExists();
     BREEZEENGINE_API bool DoesEntityExist(Entity entity);
 
-    BREEZEENGINE_API void RegisterGameUpdates(const std::function<void(int)>& update);
+    BREEZEENGINE_API void RegisterGameUpdates(const std::function<void(float)>& update);
     BREEZEENGINE_API void RegisterGameEvents(const std::function<void(int)>& events);
 
 private:
     void OnGameCoreUpdate(int deltaTime);
     void OnGameCoreEvent(int eventFlag);
-    std::vector<std::function<void(int)>> gameUpdates;
+    std::vector<std::function<void(float)>> gameUpdates;
     std::function<void(int)> gameEvent = nullptr;
 
     ECSManager* ecs;
