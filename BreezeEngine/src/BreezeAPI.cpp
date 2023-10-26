@@ -12,8 +12,8 @@ BreezeAPI::BreezeAPI(const std::string& settingsFile, const char* title)
     game = std::make_unique<GameCore>(*sdl, config.frame_rate);
     ecs = &(game->ecs);
 
-    game->RegisterObserver(std::bind(&BreezeAPI::OnGameCoreUpdate, this, std::placeholders::_1));
-    game->RegisterObserver(std::bind(&BreezeAPI::OnGameCoreEvent, this, std::placeholders::_1));
+    game->RegisterUpdateObserver(std::bind(&BreezeAPI::OnGameCoreUpdate, this, std::placeholders::_1));
+    game->RegisterEventObserver(std::bind(&BreezeAPI::OnGameCoreEvent, this, std::placeholders::_1));
 }
 
 BreezeAPI::~BreezeAPI() = default;
@@ -28,7 +28,7 @@ void BreezeAPI::Run()
     game->Run(*sdl);
 }
 
-void BreezeAPI::RegisterGameUpdates(const std::function<void(int)>& update) 
+void BreezeAPI::RegisterGameUpdates(const std::function<void(float)>& update) 
 {
     gameUpdates.push_back(update);
 }

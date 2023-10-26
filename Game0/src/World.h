@@ -13,7 +13,7 @@ public:
 
 private:
 	void Init();
-	void Update(int deltaTime);
+	void Update(float deltaTime);
 
 	void AddPlayer();
 	void AddEnemies(int count);

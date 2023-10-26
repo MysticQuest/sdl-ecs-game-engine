@@ -10,7 +10,7 @@ World::World() : breezeAPI("engine.ini", "Sample Game 1")
 	breezeAPI.RegisterGameEvents([this](int eventFlag) {
 		if (eventFlag & 1) 
 		{
-			this->FireProjectile();
+			this->PlayerFire();
 		}
 	});
 	Init();
@@ -65,10 +65,17 @@ void World::FireProjectile() {
 
 void World::PlayerFire()
 {
-	
+	projectiles.push_back(breezeAPI.AddEntity());
+	Entity& lastEntity = projectiles.back();
+	std::wstring message = L"Added Projectile with id: " + std::to_wstring(lastEntity) + L'\n';
+	OutputDebugString(message.c_str());
+	breezeAPI.AddRenderer(lastEntity, "pac2.png");
+	Vector2f spawnPoint = breezeAPI.GetPosition(1);
+	breezeAPI.AddTranform(lastEntity, spawnPoint, Vector2f(0, -15), 0, Vector2f(1, 1));
+	breezeAPI.AddCollision(lastEntity, false, true);
 }
 
-void World::Update(int deltaTime)
+void World::Update(float deltaTime)
 {
 	elapsedTime += deltaTime;
 	fireCooldown += deltaTime;

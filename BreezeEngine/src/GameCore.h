@@ -23,7 +23,7 @@ public:
 	void Run(MySDLWindow& sdlWindow);
 	void GameOver();
 	void RestartGame();
-	void RegisterObserver(const std::function<void(int)>& callback);
+	void RegisterUpdateObserver(const std::function<void(float)>& callback);
 	void RegisterEventObserver(const std::function<void(int)>& callback);
 	ECSManager ecs;
 
