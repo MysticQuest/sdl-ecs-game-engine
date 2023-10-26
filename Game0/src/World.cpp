@@ -22,7 +22,7 @@ void World::Init()
 	OutputDebugString(L"Initializing World...\n");
 
 	AddPlayer();
-	AddEnemies(10);
+	AddEnemies(3);
 }
 
 void World::AddPlayer()
@@ -56,7 +56,7 @@ void World::FireProjectile() {
 		Entity& lastEntity = projectiles.back();
 		std::wstring message = L"Added Projectile with id: " + std::to_wstring(lastEntity) + L'\n';
 		OutputDebugString(message.c_str());
-		breezeAPI.AddRenderer(lastEntity, "g0_shotBlue.png");
+		breezeAPI.AddRenderer(lastEntity, "g0_shotRed.png");
 		Vector2f spawnPoint = breezeAPI.GetPosition(entity);
 		breezeAPI.AddTranform(lastEntity, spawnPoint, Vector2f(0, 15), 90, Vector2f(1, 1));
 		breezeAPI.AddCollision(lastEntity, false, false);
@@ -69,7 +69,7 @@ void World::PlayerFire()
 	Entity& lastEntity = projectiles.back();
 	std::wstring message = L"Added Projectile with id: " + std::to_wstring(lastEntity) + L'\n';
 	OutputDebugString(message.c_str());
-	breezeAPI.AddRenderer(lastEntity, "g0_shotRed.png");
+	breezeAPI.AddRenderer(lastEntity, "g0_shotBlue.png");
 	Vector2f spawnPoint = breezeAPI.GetPosition(1);
 	breezeAPI.AddTranform(lastEntity, spawnPoint, Vector2f(0, -15), 270, Vector2f(1, 1));
 	breezeAPI.AddCollision(lastEntity, false, true);
@@ -82,7 +82,7 @@ void World::Update(float deltaTime)
 
 	if (elapsedTime >= 5000)
 	{
-		AddEnemies(10);
+		AddEnemies(3);
 		elapsedTime = 0;
 	}
 
