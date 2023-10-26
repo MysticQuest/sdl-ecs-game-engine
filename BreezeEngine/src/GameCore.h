@@ -24,6 +24,7 @@ public:
 	void GameOver();
 	void RestartGame();
 	void RegisterObserver(const std::function<void(int)>& callback);
+	void RegisterEventObserver(const std::function<void(int)>& callback);
 	ECSManager ecs;
 
 private:
@@ -35,8 +36,9 @@ private:
 	bool gameOver = false;
 	SDL_Texture* gameOverTexture = nullptr;
 
-	std::function<void(int)> observer;
-
+	std::function<void(int)> updateObserver = nullptr;
+	std::function<void(int)> eventObserver = nullptr;
+	const int SpaceReleased = 1 << 0;
 
 	std::unique_ptr<RenderSystem> renderSystem;
 	std::unique_ptr<TransformSystem> transformSystem;

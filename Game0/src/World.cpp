@@ -7,9 +7,14 @@ World::World() : breezeAPI("engine.ini", "Sample Game 1")
 {
 	windowSize = breezeAPI.GetWindowSize();
 	breezeAPI.RegisterGameUpdates(std::bind(&World::Update, this, std::placeholders::_1));
+	breezeAPI.RegisterGameEvents([this](int eventFlag) {
+		if (eventFlag & 1) 
+		{
+			this->FireProjectile();
+		}
+	});
 	Init();
 	breezeAPI.Run();
-
 }
 
 void World::Init()
@@ -56,6 +61,11 @@ void World::FireProjectile() {
 		breezeAPI.AddTranform(lastEntity, spawnPoint, Vector2f(0, 15), 0, Vector2f(1, 1));
 		breezeAPI.AddCollision(lastEntity, false, false);
 	}
+}
+
+void World::PlayerFire()
+{
+	
 }
 
 void World::Update(int deltaTime)

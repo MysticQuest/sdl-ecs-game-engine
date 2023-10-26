@@ -35,6 +35,11 @@ void GameCore::PollEvents()
         SDL_DestroyTexture(gameOverTexture);
     }
 
+    if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_SPACE)
+    {
+        eventObserver(SpaceReleased);
+    }
+
     if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_q) 
     {
         GameOver();
@@ -43,7 +48,12 @@ void GameCore::PollEvents()
 
 void GameCore::RegisterObserver(const std::function<void(int)>& callback) 
 {
-    observer = callback;
+    updateObserver = callback;
+}
+
+void GameCore::RegisterEventObserver(const std::function<void(int)>& callback) 
+{
+    eventObserver = callback;
 }
 
 void GameCore::GameOver() {
@@ -87,8 +97,8 @@ void GameCore::Update(int deltaTime)
         inputSystem->Update(ecs);
         collisionSystem->Update(ecs);
 
-        if (observer) {
-            observer(deltaTime);
+        if (updateObserver) {
+            updateObserver(deltaTime);
         }
     }
 }
